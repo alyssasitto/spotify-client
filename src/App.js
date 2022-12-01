@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { UserContext } from "./context/user.context";
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
+import Error from "./pages/Error/Error";
 
 import IsLoggedIn from "./components/IsLoggedIn/IsLoggedIn";
 import IsLoggedOut from "./components/IsLoggedOut/IsLoggedOut";
@@ -27,6 +28,8 @@ function App() {
 						</IsLoggedIn>
 					}
 				></Route>
+
+				<Route path="*" element={<Error />}></Route>
 			</Routes>
 		</div>
 	);
