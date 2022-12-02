@@ -8,6 +8,8 @@ import Error from "./pages/Error/Error";
 import IsLoggedIn from "./components/IsLoggedIn/IsLoggedIn";
 import IsLoggedOut from "./components/IsLoggedOut/IsLoggedOut";
 
+require("./index.css");
+
 function App() {
 	return (
 		<div>

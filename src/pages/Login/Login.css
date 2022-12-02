@@ -1,0 +1,23 @@
+.login-page {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.login-page img {
+	width: 80%;
+	margin-bottom: 6rem;
+}
+
+.login-page a {
+	color: #fff;
+	background-color: #1ed760;
+	font-size: 2rem;
+	font-weight: bold;
+	text-align: center;
+	padding: 1.8rem;
+	border-radius: 99px;
+	text-transform: uppercase;
+}
