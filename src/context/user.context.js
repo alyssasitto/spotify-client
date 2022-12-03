@@ -17,6 +17,7 @@ function UserProviderWrapper(props) {
 		localStorage.removeItem("spotify_token_timestamp");
 
 		setToken(undefined);
+		window.location.reload();
 	};
 
 	// Function for checking if the token has expired

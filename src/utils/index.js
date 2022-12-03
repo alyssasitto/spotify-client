@@ -1,26 +1,52 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../context/user.context";
 import axios from "axios";
 
 const API_URL = "http://localhost:5005";
+
 const token = localStorage.getItem("spotify_access_token");
 
-// Function for getting one category
-async function getOneCategory() {
+// Function for getting categories
+export async function getCategories(num) {
+	if (!token) {
+		window.location.reload();
+	}
+
 	const categories = await axios.get(`${API_URL}/categories`, {
-		headers: { token: token, limit: 1 },
+		headers: { token: token, limit: num },
 	});
 
-	const categoryDetails = await axios.get(`${API_URL}/category_details`, {
+	return categories;
+}
+
+// Function for getting category playlists
+export async function getCategoryPlaylists(id) {
+	const categoryPlaylists = await axios.get(`${API_URL}/category_playlists`, {
 		headers: {
 			token: token,
-			id: categories.data.body.categories.items[0].id,
+			id: id,
 		},
 	});
 
-	return categoryDetails;
+	return categoryPlaylists;
 }
 
 // Funtion for getting top items
-async function topItems() {}
+export async function getTopItems() {
+	const topItems = await axios.get(`${API_URL}/top_items`, {
+		headers: { token: token },
+	});
 
-export { getOneCategory };
+	return topItems;
+}
+
+// Function for getting playlist items
+export async function getPLaylistItems(arr) {
+	const newArr = await arr.map((el) => {
+		return axios.get(`${API_URL}/playlist_items`, {
+			headers: { token, id: el.id },
+		});
+	});
+
+	return Promise.all(newArr);
+}

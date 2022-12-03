@@ -1,0 +1,18 @@
+.home-page {
+	padding: 3rem 1rem 10rem;
+	background-image: linear-gradient(
+		to bottom,
+		#1d0f42,
+		#191137,
+		#17122b,
+		#15121f,
+		#121212
+	);
+
+	height: 100vh;
+
+	/* position: relative; */
+	overflow-x: hidden;
+	overflow-y: scroll;
+	background-repeat: no-repeat;
+}

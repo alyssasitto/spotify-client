@@ -3,6 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import { UserContext } from "./context/user.context";
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
+import Search from "./pages/Search/Search";
+import Library from "./pages/Library/Library";
 import Error from "./pages/Error/Error";
 
 import IsLoggedIn from "./components/IsLoggedIn/IsLoggedIn";
@@ -27,6 +29,24 @@ function App() {
 					element={
 						<IsLoggedIn>
 							<Home />
+						</IsLoggedIn>
+					}
+				></Route>
+
+				<Route
+					path="/search"
+					element={
+						<IsLoggedIn>
+							<Search />
+						</IsLoggedIn>
+					}
+				></Route>
+
+				<Route
+					path="/library"
+					element={
+						<IsLoggedIn>
+							<Library />
 						</IsLoggedIn>
 					}
 				></Route>
