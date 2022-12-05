@@ -1,0 +1,38 @@
+.library-page {
+	height: 100vh;
+	overflow: scroll;
+	background-image: linear-gradient(
+		to bottom,
+		#1d0f42,
+		#191137,
+		#17122b,
+		#15121f,
+		#121212
+	);
+	padding: 3rem 1rem 8rem;
+}
+
+.library-page h1 {
+	font-size: 2.5rem;
+	margin-bottom: 2rem;
+}
+
+.playlists {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.playlist {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.playlist-name {
+	margin-bottom: 0.5rem;
+}
+
+.playlist-img {
+	width: 5rem;
+}

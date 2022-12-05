@@ -2,8 +2,15 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/user.context";
 import Navbar from "../../components/Navbar/Navbar";
-import Slides from "../../components/Slides/Slides";
-import { getCategories, getTopItems, getCategoryPlaylists } from "../../utils";
+
+import {
+	getCategories,
+	getTopItems,
+	getCategoryPlaylists,
+	getPLaylistItems,
+	getNewReleases,
+} from "../../utils";
+import HomeSlides from "../../components/HomeSlides/HomeSlides";
 
 require("./Home.css");
 
@@ -13,6 +20,8 @@ function Home() {
 	// Make a state variable for the category playlists that will be displayed
 	const [category, setCategory] = useState([]);
 	const [topItems, setTopItems] = useState([]);
+	const [playlist, setPlaylist] = useState([]);
+	const [newReleases, setNewReleases] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const { logout } = useContext(UserContext);
 	const [error, setError] = useState("");
@@ -22,15 +31,9 @@ function Home() {
 	// Call function to get category playlists
 	async function getItems() {
 		try {
-			// Get one category
-			const category = await getCategories(1);
-
-			// Get the categories playlists
-			const categoryPlaylists = await getCategoryPlaylists(
-				category.data.body.categories.items[0].id
-			);
-
-			setCategory(categoryPlaylists);
+			// Get new releases
+			const newReleasesResult = await getNewReleases();
+			setNewReleases(newReleasesResult.data.body.albums.items);
 
 			// Get users top items
 			const items = await getTopItems();
@@ -47,7 +50,7 @@ function Home() {
 		getItems();
 	}, []);
 
-	console.log("THE PLAYLISTS ===>", category);
+	console.log("NEW RELEASES", newReleases);
 
 	return (
 		<div className="home-page">
@@ -59,9 +62,31 @@ function Home() {
 			)}
 			{!loading && (
 				<div>
-					<p>this is the home page</p>
+					<div>
+						<div className="greeting">
+							<h1>Good evening</h1>
+							<button onClick={logout}>Logout</button>
+							<img
+								src="images/clock.png"
+								alt="Clock icon"
+								className="small-img"
+							></img>
+						</div>
+					</div>
 
-					<button onClick={() => logout()}>logout</button>
+					<div className="top-items">
+						{topItems &&
+							topItems.body.items.slice(0, 6).map((el, index) => {
+								return (
+									<div key={index} className="top-item-container">
+										<img src={el.album.images[0].url}></img>
+										<p>{el.name}</p>
+									</div>
+								);
+							})}
+					</div>
+
+					<HomeSlides albums={newReleases} />
 				</div>
 			)}
 			<Navbar />

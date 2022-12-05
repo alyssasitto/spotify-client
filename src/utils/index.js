@@ -44,9 +44,31 @@ export async function getTopItems() {
 export async function getPLaylistItems(arr) {
 	const newArr = await arr.map((el) => {
 		return axios.get(`${API_URL}/playlist_items`, {
-			headers: { token, id: el.id },
+			headers: { token: token, id: el.id },
 		});
 	});
 
 	return Promise.all(newArr);
+}
+
+// Function for getting new releases
+export async function getNewReleases() {
+	if (!token) {
+		window.location.reload();
+	}
+
+	const newReleases = await axios.get(`${API_URL}/new_releases`, {
+		headers: { token },
+	});
+
+	return newReleases;
+}
+
+// Function for getting users playlists
+export async function getUserPlaylists() {
+	const playlists = await axios.get(`${API_URL}/user_playlists`, {
+		headers: { token },
+	});
+
+	return playlists;
 }

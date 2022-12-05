@@ -15,14 +15,18 @@ function Slides(props) {
 	const [error, setError] = useState("");
 
 	const getItems = async () => {
-		const items = await getPLaylistItems(props.category);
+		const playlistItems = await getPLaylistItems(
+			props.category.data.body.playlists.items
+		);
 
-		console.log(items);
+		setItems(playlistItems);
 	};
 
 	useEffect(() => {
 		getItems();
 	}, []);
+
+	console.log("LOKOSKO", items);
 
 	return <div className="playlists"></div>;
 }

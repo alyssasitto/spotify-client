@@ -36,3 +36,14 @@ a {
 ul {
 	list-style: none;
 }
+
+.small-details {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	font-size: 1.5rem;
+}
+
+.bullet {
+	width: 0.5rem;
+}
