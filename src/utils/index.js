@@ -72,3 +72,21 @@ export async function getUserPlaylists() {
 
 	return playlists;
 }
+
+// Function for getting recently listened to songs
+export async function getRecentSongs() {
+	const recentSongs = axios.get(`${API_URL}/recently_played`, {
+		headers: { token },
+	});
+
+	return recentSongs;
+}
+
+// Funtion for getting album details
+export async function getAlbumDetails(id) {
+	const albumDetails = await axios.get(`${API_URL}/album_details`, {
+		headers: { token, id },
+	});
+
+	return albumDetails;
+}

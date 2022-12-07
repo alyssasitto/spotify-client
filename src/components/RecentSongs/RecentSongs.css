@@ -1,0 +1,53 @@
+.recent-songs.show {
+	right: 0;
+	padding: 3rem 1rem 8rem;
+}
+
+.recent-songs.show.show-playbar {
+	padding: 3rem 1rem 15rem;
+}
+
+.recent-songs h1 {
+	text-align: center;
+}
+
+.recent-songs .songs {
+	display: flex;
+	flex-direction: column;
+	gap: 2.5rem;
+}
+
+.recent-songs .heading {
+	margin-bottom: 2rem;
+}
+
+.recent-songs .song-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.cover {
+	width: 5rem;
+}
+
+.recent-songs .song-details {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+}
+
+.small-details {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.song-type {
+	text-transform: capitalize;
+}
+
+.track-name {
+	margin-bottom: 0.5rem;
+	font-size: 1.8rem;
+}

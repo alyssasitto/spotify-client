@@ -14,7 +14,7 @@ require("./index.css");
 
 function App() {
 	return (
-		<div>
+		<div className="app">
 			<Routes>
 				<Route
 					path="/"

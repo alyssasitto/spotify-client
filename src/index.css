@@ -47,3 +47,45 @@ ul {
 .bullet {
 	width: 0.5rem;
 }
+
+.left-arrow {
+	width: 3rem;
+	position: absolute;
+	left: 0;
+}
+
+.ellipsis {
+	height: 2rem;
+	width: 2rem;
+}
+
+.explicit {
+	width: 1.5rem;
+}
+
+.copyright {
+	list-style: none;
+	font-size: 1.4rem;
+	margin-bottom: 1rem;
+}
+
+.slide-container {
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
+	z-index: 3;
+	right: -100vw;
+	transition: all 0.5s ease-out;
+	background-image: linear-gradient(
+		to bottom,
+		#1d0f42,
+		#191137,
+		#17122b,
+		#15121f,
+		#121212
+	);
+	overflow-y: scroll;
+	overflow-x: hidden;
+	padding: 3rem 1rem 9rem;
+	top: 0;
+}

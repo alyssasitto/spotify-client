@@ -1,0 +1,106 @@
+.album-details.show {
+	right: 0;
+	padding: 3rem 1rem 9rem;
+}
+
+.images {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	margin-bottom: 1rem;
+}
+
+.album-details h1 {
+	margin-bottom: 0.5rem;
+}
+
+.album-image {
+	width: 25rem;
+}
+
+.artist {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 1rem;
+	margin-bottom: 0.5rem;
+}
+
+.artist-img {
+	width: 3rem;
+	border-radius: 100%;
+}
+
+.release-details {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	font-size: 1.4rem;
+	color: #a5a4a4;
+}
+
+.album-heading {
+	text-transform: capitalize;
+}
+
+.options {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 1.5rem;
+}
+
+.btn {
+	background-color: transparent;
+	border: none;
+}
+
+.btn img {
+	height: 2.8rem;
+}
+
+.btn-helper {
+	display: flex;
+	gap: 1.5rem;
+}
+
+.play-btn {
+	background-color: #1ed760;
+	border: none;
+	border-radius: 50%;
+	height: 50px;
+	width: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.play-btn button {
+	background-color: transparent;
+	border: none;
+}
+
+.play-btn button img {
+	height: 4rem;
+	padding: 0.7rem;
+}
+
+.tracks {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	margin-bottom: 3rem;
+}
+
+.track {
+	display: flex;
+	justify-content: space-between;
+}
+
+.track .name {
+	color: #a5a4a4;
+	margin-top: 0.4rem;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-size: 1.6rem !important;
+}

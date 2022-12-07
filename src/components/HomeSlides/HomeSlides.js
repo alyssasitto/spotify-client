@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+
+import AlbumDetails from "../AlbumDetails/AlbumDetails";
+import { getAlbumDetails } from "../../utils";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -14,9 +17,33 @@ import { FreeMode, Pagination } from "swiper";
 require("../Slides/Slides.css");
 
 function HomeSlides(props) {
-	console.log(props.albums);
+	const [show, setShow] = useState("");
+	const [albumId, setAlbumId] = useState("");
+	const [error, setError] = useState(null);
+
+	const albums = JSON.parse(localStorage.getItem("new_releases"));
+
+	// Function for getting the album details
+	async function viewAlbum(id) {
+		try {
+			const albumDetails = await getAlbumDetails(id);
+			localStorage.setItem("album", JSON.stringify(albumDetails.data.body));
+
+			setShow("show");
+		} catch {
+			setError("Something went wrong");
+		}
+	}
+
 	return (
 		<div className="slides">
+			<AlbumDetails
+				show={show}
+				setShow={setShow}
+				albumId={albumId}
+				setAlbumId={setAlbumId}
+			/>
+
 			<div>
 				<h2>New Releases</h2>
 				<Swiper
@@ -29,11 +56,11 @@ function HomeSlides(props) {
 					modules={[FreeMode, Pagination]}
 					className="mySwiper"
 				>
-					{props.albums.slice(0, 6).map((el) => {
+					{albums.slice(0, 6).map((el) => {
 						return (
 							<div className="slide">
 								<SwiperSlide key={el.id}>
-									<div>
+									<div onClick={() => viewAlbum(el.id)}>
 										<div
 											style={{ backgroundImage: `url(${el.images[0].url})` }}
 											className="img"
@@ -60,11 +87,11 @@ function HomeSlides(props) {
 					modules={[FreeMode, Pagination]}
 					className="mySwiper"
 				>
-					{props.albums.slice(6, 12).map((el) => {
+					{albums.slice(6, 12).map((el) => {
 						return (
 							<div className="slide">
 								<SwiperSlide key={el.id}>
-									<div>
+									<div onClick={() => viewAlbum(el.id)}>
 										<div
 											style={{ backgroundImage: `url(${el.images[0].url})` }}
 											className="img"
@@ -91,11 +118,11 @@ function HomeSlides(props) {
 					modules={[FreeMode, Pagination]}
 					className="mySwiper"
 				>
-					{props.albums.slice(12, 18).map((el) => {
+					{albums.slice(12, 18).map((el) => {
 						return (
 							<div className="slide">
 								<SwiperSlide key={el.id}>
-									<div>
+									<div onClick={() => viewAlbum(el.id)}>
 										<div
 											style={{ backgroundImage: `url(${el.images[0].url})` }}
 											className="img"
@@ -122,11 +149,11 @@ function HomeSlides(props) {
 					modules={[FreeMode, Pagination]}
 					className="mySwiper"
 				>
-					{props.albums.slice(18, 24).map((el) => {
+					{albums.slice(18, 24).map((el) => {
 						return (
 							<div className="slide">
 								<SwiperSlide key={el.id}>
-									<div>
+									<div onClick={() => viewAlbum(el.id)}>
 										<div
 											style={{ backgroundImage: `url(${el.images[0].url})` }}
 											className="img"
@@ -153,11 +180,11 @@ function HomeSlides(props) {
 					modules={[FreeMode, Pagination]}
 					className="mySwiper"
 				>
-					{props.albums.slice(24, 30).map((el) => {
+					{albums.slice(24, 30).map((el) => {
 						return (
 							<div className="slide">
 								<SwiperSlide key={el.id}>
-									<div>
+									<div onClick={() => viewAlbum(el.id)}>
 										<div
 											style={{ backgroundImage: `url(${el.images[0].url})` }}
 											className="img"
@@ -184,11 +211,11 @@ function HomeSlides(props) {
 					modules={[FreeMode, Pagination]}
 					className="mySwiper"
 				>
-					{props.albums.slice(30, 36).map((el) => {
+					{albums.slice(30, 36).map((el) => {
 						return (
 							<div className="slide">
 								<SwiperSlide key={el.id}>
-									<div>
+									<div onClick={() => viewAlbum(el.id)}>
 										<div
 											style={{ backgroundImage: `url(${el.images[0].url})` }}
 											className="img"
@@ -215,11 +242,11 @@ function HomeSlides(props) {
 					modules={[FreeMode, Pagination]}
 					className="mySwiper"
 				>
-					{props.albums.slice(36, 42).map((el) => {
+					{albums.slice(36, 42).map((el) => {
 						return (
 							<div className="slide">
 								<SwiperSlide key={el.id}>
-									<div>
+									<div onClick={() => viewAlbum(el.id)}>
 										<div
 											style={{ backgroundImage: `url(${el.images[0].url})` }}
 											className="img"
