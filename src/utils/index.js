@@ -41,13 +41,12 @@ export async function getTopItems() {
 }
 
 // Function for getting playlist items
-export async function getPLaylistItems(arr) {
+export async function getPlaylistSongs(arr) {
 	const newArr = await arr.map((el) => {
 		return axios.get(`${API_URL}/playlist_items`, {
-			headers: { token: token, id: el.id },
+			headers: { token: token, id: el },
 		});
 	});
-
 	return Promise.all(newArr);
 }
 

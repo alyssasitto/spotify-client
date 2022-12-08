@@ -1,0 +1,14 @@
+.category-playlists.show {
+	right: 0;
+	padding: 3rem 1rem 9rem;
+}
+
+.height {
+	height: 0vh;
+	overflow-y: hidden;
+}
+
+.category-playlists h1 {
+	margin: 4rem 0 0;
+	font-size: 2.8rem !important;
+}

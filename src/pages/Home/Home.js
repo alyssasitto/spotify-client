@@ -38,7 +38,7 @@ function Home() {
 			// If the key "new_releases" is equal to undefined call the getNewReleases function and set the result in localstorage
 			if (!localStorage.getItem("new_releases")) {
 				const newReleasesResult = await getNewReleases();
-				setNewReleases("");
+				setNewReleases(newReleasesResult.data.body.albums.items);
 				localStorage.setItem(
 					"new_releases",
 					JSON.stringify(newReleasesResult.data.body.albums.items)

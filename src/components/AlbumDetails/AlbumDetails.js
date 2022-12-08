@@ -6,12 +6,20 @@ require("./AlbumDetails.css");
 function AlbumDetails(props) {
 	const back = () => {
 		props.setShow("");
+
+		if (props.setHeight) {
+			props.setHeight("");
+		}
 	};
 
 	const album = JSON.parse(localStorage.getItem("album"));
 	console.log("THIS IS THE ALBUM", album);
 
 	const tracks = album.tracks.items;
+
+	if (props.setHeight && props.show === "show") {
+		props.setHeight("height");
+	}
 
 	return (
 		<div className={"album-details slide-container " + props.show}>
