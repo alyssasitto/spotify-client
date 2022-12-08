@@ -85,14 +85,14 @@ function Search() {
 		"#056952",
 	];
 
-	async function getItems() {
+	const getItems = async () => {
 		const result = await getCategories(50);
 		setCategories(result);
 
 		setLoading(false);
-	}
+	};
 
-	async function viewCategoryPlaylists(id, name) {
+	const viewCategoryPlaylists = async (id, name) => {
 		console.log(id);
 		const details = await getCategoryPlaylists(id);
 		// localStorage.setItem("category", JSON.stringify(details.data.body));
@@ -100,13 +100,11 @@ function Search() {
 		setCategoryName(name);
 
 		setShowCategoryPlaylists("show");
-	}
+	};
 
 	useEffect(() => {
 		getItems();
 	}, []);
-
-	console.log("CARRYRYREWI", category);
 
 	return (
 		<div className={"search-page "}>

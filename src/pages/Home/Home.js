@@ -33,7 +33,7 @@ function Home() {
 	};
 
 	// Call function to get category playlists
-	async function getItems() {
+	const getItems = async () => {
 		try {
 			// If the key "new_releases" is equal to undefined call the getNewReleases function and set the result in localstorage
 			if (!localStorage.getItem("new_releases")) {
@@ -61,7 +61,7 @@ function Home() {
 		} catch {
 			setError("something went wrong");
 		}
-	}
+	};
 
 	useEffect(() => {
 		getItems();

@@ -26,8 +26,6 @@ function Slides(props) {
 		getItems();
 	}, []);
 
-	console.log("LOKOSKO", items);
-
 	return <div className="playlists"></div>;
 }
 

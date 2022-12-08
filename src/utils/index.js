@@ -7,7 +7,7 @@ const API_URL = "http://localhost:5005";
 const token = localStorage.getItem("spotify_access_token");
 
 // Function for getting categories
-export async function getCategories(num) {
+export const getCategories = async (num) => {
 	if (!token) {
 		window.location.reload();
 	}
@@ -17,10 +17,10 @@ export async function getCategories(num) {
 	});
 
 	return categories;
-}
+};
 
 // Function for getting category playlists
-export async function getCategoryPlaylists(id) {
+export const getCategoryPlaylists = async (id) => {
 	const categoryPlaylists = await axios.get(`${API_URL}/category_playlists`, {
 		headers: {
 			token: token,
@@ -29,29 +29,38 @@ export async function getCategoryPlaylists(id) {
 	});
 
 	return categoryPlaylists;
-}
+};
 
 // Funtion for getting top items
-export async function getTopItems() {
+export const getTopItems = async () => {
 	const topItems = await axios.get(`${API_URL}/top_items`, {
 		headers: { token: token },
 	});
 
 	return topItems;
-}
+};
 
-// Function for getting playlist items
-export async function getPlaylistSongs(arr) {
+// Function for getting several playlist items
+export const getPlaylistSongs = async (arr) => {
 	const newArr = await arr.map((el) => {
 		return axios.get(`${API_URL}/playlist_items`, {
 			headers: { token: token, id: el },
 		});
 	});
 	return Promise.all(newArr);
-}
+};
+
+// Function for getting one playlist details
+export const getPlaylist = async (id) => {
+	const playlist = await axios.get(`${API_URL}/playlist`, {
+		headers: { token, id },
+	});
+
+	return playlist;
+};
 
 // Function for getting new releases
-export async function getNewReleases() {
+export const getNewReleases = async () => {
 	if (!token) {
 		window.location.reload();
 	}
@@ -61,31 +70,31 @@ export async function getNewReleases() {
 	});
 
 	return newReleases;
-}
+};
 
 // Function for getting users playlists
-export async function getUserPlaylists() {
+export const getUserPlaylists = async () => {
 	const playlists = await axios.get(`${API_URL}/user_playlists`, {
 		headers: { token },
 	});
 
 	return playlists;
-}
+};
 
 // Function for getting recently listened to songs
-export async function getRecentSongs() {
+export const getRecentSongs = async () => {
 	const recentSongs = axios.get(`${API_URL}/recently_played`, {
 		headers: { token },
 	});
 
 	return recentSongs;
-}
+};
 
 // Funtion for getting album details
-export async function getAlbumDetails(id) {
+export const getAlbumDetails = async (id) => {
 	const albumDetails = await axios.get(`${API_URL}/album_details`, {
 		headers: { token, id },
 	});
 
 	return albumDetails;
-}
+};

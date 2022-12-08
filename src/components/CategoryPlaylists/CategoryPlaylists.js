@@ -23,7 +23,7 @@ function CategoryPlaylists(props) {
 		props.setShowCategoryPlaylists("");
 	};
 
-	async function viewAlbum(id) {
+	const viewAlbum = async (id) => {
 		try {
 			const albumDetails = await getAlbumDetails(id);
 			localStorage.setItem("album", JSON.stringify(albumDetails.data.body));
@@ -32,22 +32,26 @@ function CategoryPlaylists(props) {
 		} catch {
 			setError("Something went wrong");
 		}
-	}
+	};
 
-	async function getPlaylistDetails() {
-		setLoading(true);
+	const getPlaylistDetails = async () => {
+		try {
+			setLoading(true);
 
-		const playlistIds = props.category.map((el) => {
-			return el.id;
-		});
+			const playlistIds = props.category.map((el) => {
+				return el.id;
+			});
 
-		const playlistResults = await getPlaylistSongs(playlistIds);
-		setPlaylists(playlistResults);
+			const playlistResults = await getPlaylistSongs(playlistIds);
+			setPlaylists(playlistResults);
 
-		setLoading(false);
+			setLoading(false);
 
-		console.log("THESE ARE THE IDS", playlistIds);
-	}
+			console.log("THESE ARE THE IDS", playlistIds);
+		} catch {
+			setError("Something went wrong");
+		}
+	};
 
 	useEffect(() => {
 		if (props.showCategoryPlaylists === "show") {
@@ -61,14 +65,14 @@ function CategoryPlaylists(props) {
 				"category-playlists slide-container " + props.showCategoryPlaylists
 			}
 		>
+			<img
+				src="images/left-arrow.svg"
+				onClick={back}
+				className="left-arrow"
+				alt="Left arrow icon"
+			></img>
 			{loading && (
 				<div>
-					<img
-						src="images/left-arrow.svg"
-						onClick={back}
-						className="left-arrow"
-						alt="Left arrow icon"
-					></img>
 					<p>loading...</p>
 				</div>
 			)}
@@ -76,19 +80,13 @@ function CategoryPlaylists(props) {
 			{!loading && (
 				<div>
 					<AlbumDetails show={show} setShow={setShow} setHeight={setHeight} />
-					<img
-						src="images/left-arrow.svg"
-						onClick={back}
-						className="left-arrow"
-						alt="Left arrow icon"
-					></img>
 
-					<div className={height}>
+					<div className={"margin-helper " + height}>
 						<h1>{props.categoryName}</h1>
 
 						{props.category.map((playlist, index) => {
 							return (
-								<div>
+								<div className="category-slides">
 									<h2>{playlist.name}</h2>
 									<Swiper
 										slidesPerView={"auto"}
@@ -103,25 +101,28 @@ function CategoryPlaylists(props) {
 										{playlists.length > 0 &&
 											playlists[index].data.items.slice(0, 6).map((el) => {
 												console.log(el);
+
 												return (
 													<div className="slide">
-														<SwiperSlide
-															key={el.track.album.id}
-															onClick={() => viewAlbum(el.track.album.id)}
-														>
-															<div>
-																<div
-																	style={{
-																		backgroundImage: `url(${el.track.album.images[0].url})`,
-																	}}
-																	className="img"
-																></div>
+														{el.track !== null && (
+															<SwiperSlide
+																key={el.track.album.id}
+																onClick={() => viewAlbum(el.track.album.id)}
+															>
+																<div>
+																	<div
+																		style={{
+																			backgroundImage: `url(${el.track.album.images[0].url})`,
+																		}}
+																		className="img"
+																	></div>
 
-																<p className="album-name">
-																	{el.track.album.name}
-																</p>
-															</div>
-														</SwiperSlide>
+																	<p className="album-name">
+																		{el.track.album.name}
+																	</p>
+																</div>
+															</SwiperSlide>
+														)}
 													</div>
 												);
 											})}
@@ -132,6 +133,7 @@ function CategoryPlaylists(props) {
 					</div>
 				</div>
 			)}
+			{error && <p>{error}</p>}
 		</div>
 	);
 }

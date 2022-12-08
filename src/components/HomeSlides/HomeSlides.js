@@ -24,7 +24,7 @@ function HomeSlides(props) {
 	const albums = JSON.parse(localStorage.getItem("new_releases"));
 
 	// Function for getting the album details
-	async function viewAlbum(id) {
+	const viewAlbum = async (id) => {
 		try {
 			const albumDetails = await getAlbumDetails(id);
 			localStorage.setItem("album", JSON.stringify(albumDetails.data.body));
@@ -33,7 +33,7 @@ function HomeSlides(props) {
 		} catch {
 			setError("Something went wrong");
 		}
-	}
+	};
 
 	return (
 		<div className="slides">
@@ -260,6 +260,7 @@ function HomeSlides(props) {
 					})}
 				</Swiper>
 			</div>
+			{error && <p>{error}</p>}
 		</div>
 	);
 }

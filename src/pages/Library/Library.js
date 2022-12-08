@@ -1,15 +1,18 @@
 import { useState, useEffect, useContext } from "react";
 import { getUserPlaylists } from "../../utils";
 import Navbar from "../../components/Navbar/Navbar";
+import PlaylistDetails from "../../components/PlaylistDetails/PlaylistDetails";
 
 require("./Library.css");
 
 function Library() {
 	const [playlists, setPlaylists] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const [playlistId, setPlaylistId] = useState("");
+	const [showPlaylist, setShowPlaylist] = useState("");
 	const [error, setError] = useState(null);
 
-	async function getItems() {
+	const getItems = async () => {
 		try {
 			const playlistItems = await getUserPlaylists();
 			setPlaylists(playlistItems.data.body.items);
@@ -18,7 +21,12 @@ function Library() {
 		} catch {
 			setError("something went wrong");
 		}
-	}
+	};
+
+	const viewPlaylist = (id) => {
+		setPlaylistId(id);
+		setShowPlaylist("show");
+	};
 
 	useEffect(() => {
 		getItems();
@@ -30,11 +38,18 @@ function Library() {
 			{loading && <p>loading...</p>}
 			{!loading && (
 				<div>
+					{playlistId && (
+						<PlaylistDetails
+							playlistId={playlistId}
+							showPlaylist={showPlaylist}
+							setShowPlaylist={setShowPlaylist}
+						/>
+					)}
 					<h1>Your Library</h1>
 					<div className="playlists">
 						{playlists.map((el) => {
 							return (
-								<div className="playlist">
+								<div onClick={() => viewPlaylist(el.id)} className="playlist">
 									{el.images.length === 0 && (
 										<img
 											src="images/spotify-black-icon.png"
