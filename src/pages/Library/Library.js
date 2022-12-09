@@ -24,8 +24,8 @@ function Library() {
 	};
 
 	const viewPlaylist = (id) => {
-		setPlaylistId(id);
 		setShowPlaylist("show");
+		setPlaylistId(id);
 	};
 
 	useEffect(() => {
@@ -38,13 +38,12 @@ function Library() {
 			{loading && <p>loading...</p>}
 			{!loading && (
 				<div>
-					{playlistId && (
-						<PlaylistDetails
-							playlistId={playlistId}
-							showPlaylist={showPlaylist}
-							setShowPlaylist={setShowPlaylist}
-						/>
-					)}
+					<PlaylistDetails
+						playlistId={playlistId}
+						showPlaylist={showPlaylist}
+						setShowPlaylist={setShowPlaylist}
+					/>
+
 					<h1>Your Library</h1>
 					<div className="playlists">
 						{playlists.map((el) => {

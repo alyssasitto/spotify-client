@@ -17,6 +17,8 @@ function PlaylistDetails(props) {
 		try {
 			setLoading(true);
 
+			props.setShowPlaylist("show");
+
 			const playlistDetails = await getPlaylist(props.playlistId);
 			setPlaylist(playlistDetails.data.body);
 
@@ -27,7 +29,9 @@ function PlaylistDetails(props) {
 	};
 
 	useEffect(() => {
-		getPlaylistDetails();
+		if (props.showPlaylist === "show") {
+			getPlaylistDetails();
+		}
 	}, [props.playlistId]);
 
 	console.log("THIS IS THE PLAYLIST", playlist);
