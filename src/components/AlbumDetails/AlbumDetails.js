@@ -13,7 +13,6 @@ function AlbumDetails(props) {
 	};
 
 	const album = JSON.parse(localStorage.getItem("album"));
-	console.log("THIS IS THE ALBUM", album);
 
 	const tracks = album.tracks.items;
 

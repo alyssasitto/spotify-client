@@ -67,7 +67,6 @@ function Home() {
 		getItems();
 	}, [topItems, newReleases]);
 
-	console.log("THESE ARE THE TOP ITEMS", topItems);
 	return (
 		<div className="home-page">
 			{loading && (

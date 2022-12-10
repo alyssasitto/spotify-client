@@ -10,14 +10,36 @@
 }
 
 .search-page h2 {
-	font-size: 1.8rem;
+	font-size: 2rem;
 	margin-bottom: 1rem;
+}
+
+.search-container {
+	position: relative;
+	margin-bottom: 4rem;
 }
 
 .search-page input {
 	width: 100%;
-	margin-bottom: 4rem;
-	padding: 0.8rem;
+	padding: 1rem;
+	border-radius: 5px;
+	border: none;
+	font-size: 1.6rem;
+}
+
+.search-page input::placeholder {
+	font-size: 1.6rem;
+}
+
+.search-btn {
+	position: absolute;
+	right: 0;
+	height: 100%;
+	padding: 0 1rem;
+	background-color: #1ed760;
+	border: none;
+	color: #fff;
+	border-radius: 5px;
 }
 
 .categories {
@@ -48,8 +70,4 @@
 	bottom: 0;
 	border-radius: 7px;
 	transform: rotate(20deg);
-}
-
-.box {
-	background-color: antiquewhite;
 }

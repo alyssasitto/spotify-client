@@ -98,3 +98,16 @@ export const getAlbumDetails = async (id) => {
 
 	return albumDetails;
 };
+
+// Function for getting search results
+export const getSearchResults = async (search) => {
+	try {
+		const searchResults = await axios.get(`${API_URL}/search`, {
+			headers: { token, search },
+		});
+
+		return searchResults;
+	} catch (err) {
+		return err;
+	}
+};
