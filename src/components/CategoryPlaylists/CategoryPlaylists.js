@@ -16,22 +16,17 @@ function CategoryPlaylists(props) {
 	const [playlists, setPlaylists] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [height, setHeight] = useState("");
-	const [show, setShow] = useState("");
+	const [showAlbum, setShowAlbum] = useState("");
+	const [albumId, setAlbumId] = useState("");
 	const [error, setError] = useState(null);
 
 	const back = () => {
 		props.setShowCategoryPlaylists("");
 	};
 
-	const viewAlbum = async (id) => {
-		try {
-			const albumDetails = await getAlbumDetails(id);
-			localStorage.setItem("album", JSON.stringify(albumDetails.data.body));
-
-			setShow("show");
-		} catch {
-			setError("Something went wrong");
-		}
+	const viewAlbum = (id) => {
+		setAlbumId(id);
+		setShowAlbum("show");
 	};
 
 	const getPlaylistDetails = async () => {
@@ -79,7 +74,12 @@ function CategoryPlaylists(props) {
 
 			{!loading && (
 				<div>
-					<AlbumDetails show={show} setShow={setShow} setHeight={setHeight} />
+					<AlbumDetails
+						showAlbum={showAlbum}
+						setShowAlbum={setShowAlbum}
+						albumId={albumId}
+						setHeight={setHeight}
+					/>
 
 					<div className={"margin-helper " + height}>
 						<h1>{props.categoryName}</h1>
@@ -100,8 +100,6 @@ function CategoryPlaylists(props) {
 									>
 										{playlists.length > 0 &&
 											playlists[index].data.items.slice(0, 6).map((el) => {
-												console.log(el);
-
 												return (
 													<div className="slide">
 														{el.track !== null && (

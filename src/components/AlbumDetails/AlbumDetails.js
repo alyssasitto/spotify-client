@@ -4,25 +4,55 @@ import { getAlbumDetails } from "../../utils";
 require("./AlbumDetails.css");
 
 function AlbumDetails(props) {
+	const [loading, setLoading] = useState(true);
+	const [album, setAlbum] = useState([]);
+	const [error, setError] = useState("");
+
+	const getAlbum = async () => {
+		try {
+			setLoading(true);
+			setAlbum([]);
+			setError("");
+			const albumDetails = await getAlbumDetails(props.albumId);
+			setAlbum(albumDetails.data.body);
+
+			setLoading(false);
+		} catch {
+			setError("Something went wrong");
+			setLoading(false);
+		}
+	};
+
 	const back = () => {
-		props.setShow("");
+		props.setShowAlbum("");
 
 		if (props.setHeight) {
 			props.setHeight("");
 		}
 	};
 
-	const album = JSON.parse(localStorage.getItem("album"));
+	useEffect(() => {
+		if (props.showAlbum === "show") {
+			getAlbum();
+		}
 
-	const tracks = album.tracks.items;
+		if (props.setHeight && props.showAlbum === "show") {
+			props.setHeight("height");
+		}
+	}, [props.albumId]);
 
-	if (props.setHeight && props.show === "show") {
-		props.setHeight("height");
-	}
+	console.log("THIS IS THE ALBUM OMG", album);
 
 	return (
-		<div className={"album-details slide-container " + props.show}>
-			{album && (
+		<div className={"album-details slide-container " + props.showAlbum}>
+			{loading && <p>loading...</p>}
+			<img
+				src="images/left-arrow.svg"
+				onClick={back}
+				className="left-arrow"
+				alt="Left arrow icon"
+			></img>
+			{!loading && album && (
 				<div>
 					<div className="images">
 						<img
@@ -62,8 +92,8 @@ function AlbumDetails(props) {
 					</div>
 
 					<div className="tracks">
-						{tracks &&
-							tracks.map((el, index) => {
+						{album.tracks.items &&
+							album.tracks.items.map((el, index) => {
 								return (
 									<div key={el.index} className="track">
 										<div>
@@ -90,6 +120,7 @@ function AlbumDetails(props) {
 					</footer>
 				</div>
 			)}
+			{error && <p>{error}</p>}
 		</div>
 	);
 }

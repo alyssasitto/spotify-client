@@ -16,32 +16,23 @@ import { FreeMode, Pagination } from "swiper";
 
 require("../Slides/Slides.css");
 
-function HomeSlides(props) {
-	const [show, setShow] = useState("");
+function HomeSlides() {
+	const [showAlbum, setShowAlbum] = useState("");
 	const [albumId, setAlbumId] = useState("");
-	const [error, setError] = useState(null);
 
 	const albums = JSON.parse(localStorage.getItem("new_releases"));
 
-	// Function for getting the album details
-	const viewAlbum = async (id) => {
-		try {
-			const albumDetails = await getAlbumDetails(id);
-			localStorage.setItem("album", JSON.stringify(albumDetails.data.body));
-
-			setShow("show");
-		} catch {
-			setError("Something went wrong");
-		}
+	const viewAlbum = (id) => {
+		setAlbumId(id);
+		setShowAlbum("show");
 	};
 
 	return (
 		<div className="slides">
 			<AlbumDetails
-				show={show}
-				setShow={setShow}
+				showAlbum={showAlbum}
+				setShowAlbum={setShowAlbum}
 				albumId={albumId}
-				setAlbumId={setAlbumId}
 			/>
 
 			<div>
@@ -260,7 +251,6 @@ function HomeSlides(props) {
 					})}
 				</Swiper>
 			</div>
-			{error && <p>{error}</p>}
 		</div>
 	);
 }

@@ -63,9 +63,13 @@ function Home() {
 		}
 	};
 
+	// Function for showing album
+
 	useEffect(() => {
 		getItems();
 	}, [topItems, newReleases]);
+
+	console.log(topItems);
 
 	return (
 		<div className="home-page">
