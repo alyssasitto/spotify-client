@@ -111,3 +111,16 @@ export const getSearchResults = async (search) => {
 		return err;
 	}
 };
+
+// Function for getting an indivdual artist
+export const getArtist = async (search) => {
+	try {
+		const artist = await axios.get(`${API_URL}/artist`, {
+			headers: { token, search },
+		});
+
+		return artist;
+	} catch (err) {
+		return err;
+	}
+};

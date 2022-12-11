@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/user.context";
 import Navbar from "../../components/Navbar/Navbar";
 import RecentSongs from "../../components/RecentSongs/RecentSongs";
+import AlbumDetails from "../../components/AlbumDetails/AlbumDetails";
 
 import { getTopItems, getNewReleases, getRecentSongs } from "../../utils";
 import HomeSlides from "../../components/HomeSlides/HomeSlides";
@@ -23,6 +24,8 @@ function Home() {
 	);
 	const [recentSongs, setRecentSongs] = useState([]);
 	const [showRecents, setShowRecents] = useState("");
+	const [showAlbum, setShowAlbum] = useState("");
+	const [albumId, setAlbumId] = useState("");
 	const [loading, setLoading] = useState(true);
 	const { logout } = useContext(UserContext);
 	const [error, setError] = useState("");
@@ -64,6 +67,10 @@ function Home() {
 	};
 
 	// Function for showing album
+	const viewAlbum = (id) => {
+		setAlbumId(id);
+		setShowAlbum("show");
+	};
 
 	useEffect(() => {
 		getItems();
@@ -86,6 +93,13 @@ function Home() {
 						showRecents={showRecents}
 						setShowRecents={setShowRecents}
 					/>
+
+					<AlbumDetails
+						showAlbum={showAlbum}
+						setShowAlbum={setShowAlbum}
+						albumId={albumId}
+					/>
+
 					<div>
 						<div className="greeting">
 							<h1>Good evening</h1>
@@ -103,7 +117,11 @@ function Home() {
 						{topItems &&
 							topItems.body.items.slice(0, 6).map((el, index) => {
 								return (
-									<div key={index} className="top-item-container">
+									<div
+										key={index}
+										onClick={() => viewAlbum(el.album.id)}
+										className="top-item-container"
+									>
 										<img src={el.album.images[0].url}></img>
 										<p>{el.name}</p>
 									</div>

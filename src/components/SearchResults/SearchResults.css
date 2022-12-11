@@ -6,3 +6,21 @@
 .search-result-songs {
 	margin-top: 4rem;
 }
+
+.artist-container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.artist-cover {
+	border-radius: 50px;
+}
+
+.artist-name {
+	margin-bottom: 0.5rem;
+}
+
+.small-right-arrow {
+	width: 1rem;
+}

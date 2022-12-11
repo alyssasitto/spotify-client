@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { getSearchResults } from "../../utils";
+import { getArtist, getSearchResults } from "../../utils";
 
 require("./SearchResults.css");
 
 function SearchResults(props) {
 	const [loading, setLoading] = useState(true);
+	const [artist, setArtist] = useState([]);
 	const [searchResults, setSearchResults] = useState([]);
 	const [error, setError] = useState("");
 	const back = () => {
@@ -21,6 +22,9 @@ function SearchResults(props) {
 			const results = await getSearchResults(props.searchItem);
 			setSearchResults(results.data.body.tracks.items);
 
+			const artistResults = await getArtist(props.searchItem);
+			setArtist(artistResults.data.body.artists.items[0]);
+
 			setLoading(false);
 		} catch {
 			setLoading(false);
@@ -34,7 +38,8 @@ function SearchResults(props) {
 		}
 	}, [props.showSearchResults]);
 
-	console.log(searchResults);
+	console.log("THESE ARE THE SEARCH RESULTS", searchResults);
+	console.log("THESE ARE THE ARTIST RESULTS ===>", artist);
 
 	return (
 		<div
@@ -52,6 +57,23 @@ function SearchResults(props) {
 			{loading && <p>loading...</p>}
 			{!loading && searchResults && (
 				<div className="songs search-result-songs">
+					{artist &&
+						artist.name.toLowerCase() === props.searchItem.toLowerCase() && (
+							<div className="artist-container">
+								<div className="song-details">
+									<img
+										src={artist.images[0].url}
+										className="cover artist-cover"
+									></img>
+									<div>
+										<p className="artist-name">{artist.name}</p>
+										<p>Artist</p>
+									</div>
+								</div>
+								<img src="images/right.png" className="small-right-arrow"></img>
+							</div>
+						)}
+
 					{searchResults.map((el) => {
 						return (
 							<div className="song-container">
