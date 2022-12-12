@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { getPlaylist } from "../../utils";
+import { Link } from "react-router-dom";
 
 require("./PlaylistDetails.css");
 
@@ -105,7 +106,11 @@ function PlaylistDetails(props) {
 													className="explicit"
 												></img>
 											)}{" "}
-											{el.track.artists[0].name}
+											<span className="artist-link">
+												<Link to={`/artist/${el.track.artists[0].name}`}>
+													{el.track.artists[0].name}
+												</Link>
+											</span>
 										</p>
 									</div>
 									<img src="images/ellipsis.svg" className="ellipsis"></img>

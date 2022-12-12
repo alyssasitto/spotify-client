@@ -1,0 +1,54 @@
+.artist-page {
+	padding-bottom: 10rem;
+	height: 100vh;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	background-repeat: no-repeat;
+}
+
+.artist-heading {
+	font-size: 5rem;
+	padding-left: 1rem;
+}
+
+.top-artist-songs-container {
+	margin-top: 2rem;
+	padding: 0 1rem;
+}
+
+.top-artist-songs-container h2 {
+	margin-bottom: 0.5rem;
+	font-size: 3rem;
+}
+
+.flex-container {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.image-heading {
+	height: 30rem;
+	background-size: cover;
+	background-position: center;
+	display: flex;
+	align-items: flex-end;
+}
+
+.artist-back-btn {
+	background-color: rgba(0, 0, 0, 0.477);
+	height: 3.5rem;
+	width: 3.5rem;
+	position: absolute;
+	top: 1.5rem;
+	left: 1.5rem;
+	border-radius: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.artist-albums-container,
+.artist-singles-container {
+	margin-top: 2.5rem;
+}

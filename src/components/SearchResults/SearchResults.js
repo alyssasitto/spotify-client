@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { getArtist, getSearchResults } from "../../utils";
+import { Link } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 
 require("./SearchResults.css");
 
@@ -11,6 +14,12 @@ function SearchResults(props) {
 	const [error, setError] = useState("");
 	const back = () => {
 		props.setShowSearchResults("");
+	};
+
+	const navigate = useNavigate();
+
+	const viewArtist = (artist) => {
+		navigate(`/artist/${artist}`);
 	};
 
 	const getResults = async () => {
@@ -59,7 +68,10 @@ function SearchResults(props) {
 				<div className="songs search-result-songs">
 					{artist &&
 						artist.name.toLowerCase() === props.searchItem.toLowerCase() && (
-							<div className="artist-container">
+							<div
+								onClick={() => viewArtist(artist.name.toLowerCase())}
+								className="artist-container"
+							>
 								<div className="song-details">
 									<img
 										src={artist.images[0].url}
@@ -90,7 +102,11 @@ function SearchResults(props) {
 											)}
 											<p class="song-type">{el.album.album_type}</p>
 											<img src="images/bullet.png" className="bullet"></img>
-											<p>{el.artists[0].name}</p>
+											<span className="artist-link">
+												<Link to={`/artist/${el.artists[0].name}`}>
+													{el.artists[0].name}
+												</Link>
+											</span>
 										</div>
 									</div>
 								</div>

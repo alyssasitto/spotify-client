@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 require("./RecentSongs.css");
 
 function RecentSongs(props) {
@@ -30,7 +32,11 @@ function RecentSongs(props) {
 										)}
 										<p class="song-type">{el.track.album.album_type}</p>
 										<img src="images/bullet.png" className="bullet"></img>
-										<p>{el.track.artists[0].name}</p>
+										<span className="artist-link">
+											<Link to={`/artist/${el.track.artists[0].name}`}>
+												{el.track.artists[0].name}
+											</Link>
+										</span>
 									</div>
 								</div>
 							</div>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAlbumDetails } from "../../utils";
+import { Link } from "react-router-dom";
 
 require("./AlbumDetails.css");
 
@@ -67,7 +68,11 @@ function AlbumDetails(props) {
 						<h1>{album.name}</h1>
 						<div className="artist">
 							<img src={album.images[0].url} className="artist-img"></img>
-							<p>{album.artists[0].name}</p>
+							<span className="artist-link">
+								<Link to={`/artist/${album.artists[0].name}`}>
+									{album.artists[0].name}
+								</Link>
+							</span>
 						</div>
 						<div className="release-details">
 							<p className="album-heading">{album.album_type}</p>
@@ -106,7 +111,11 @@ function AlbumDetails(props) {
 														className="explicit"
 													></img>
 												)}{" "}
-												{el.artists[0].name}
+												<span className="artist-link">
+													<Link to={`/artist/${el.artists[0].name}`}>
+														{el.artists[0].name}
+													</Link>
+												</span>
 											</p>
 										</div>
 										<img src="images/ellipsis.svg" className="ellipsis"></img>

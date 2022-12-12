@@ -104,3 +104,12 @@
 	gap: 0.5rem;
 	font-size: 1.6rem !important;
 }
+
+.artist-link {
+	border-bottom: 2px solid transparent;
+	transition: all 0.2s;
+}
+
+.artist-link:hover {
+	border-bottom: 2px solid #fff;
+}

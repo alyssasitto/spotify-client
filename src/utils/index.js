@@ -124,3 +124,29 @@ export const getArtist = async (search) => {
 		return err;
 	}
 };
+
+// Function for getting an artists top tracks
+export const getArtistTracks = async (id) => {
+	try {
+		const topTracks = axios.get(`${API_URL}/artist_top_tracks`, {
+			headers: { token, id },
+		});
+
+		return topTracks;
+	} catch (err) {
+		return err;
+	}
+};
+
+// Function for getting an artists albums
+export const getArtistAlbums = async (id) => {
+	try {
+		const artistAlbums = await axios.get(`${API_URL}/artist_albums`, {
+			headers: { token, id },
+		});
+
+		return artistAlbums;
+	} catch (err) {
+		return err;
+	}
+};

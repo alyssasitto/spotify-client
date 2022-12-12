@@ -5,6 +5,7 @@ import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
 import Search from "./pages/Search/Search";
 import Library from "./pages/Library/Library";
+import Artist from "./pages/Artist/Artist";
 import Error from "./pages/Error/Error";
 
 import IsLoggedIn from "./components/IsLoggedIn/IsLoggedIn";
@@ -47,6 +48,15 @@ function App() {
 					element={
 						<IsLoggedIn>
 							<Library />
+						</IsLoggedIn>
+					}
+				></Route>
+
+				<Route
+					path="/artist/:artist"
+					element={
+						<IsLoggedIn>
+							<Artist />
 						</IsLoggedIn>
 					}
 				></Route>
