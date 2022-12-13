@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
+import Player from "../Player/Player";
 
 require("./Navbar.css");
 
 function Navbar() {
 	return (
 		<div className={"navbar "}>
-			{/* {playbar === "show-playbar" && <Player />} */}
+			<Player />
 
 			<div>
 				<ul>

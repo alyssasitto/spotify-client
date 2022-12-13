@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { getArtist, getSearchResults } from "../../utils";
+import { getArtist, getSearchResults, playSong } from "../../utils";
 import { Link } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
@@ -88,7 +88,12 @@ function SearchResults(props) {
 
 					{searchResults.map((el) => {
 						return (
-							<div className="song-container">
+							<div
+								onClick={async () =>
+									await playSong(el.album.uri, el.track_number)
+								}
+								className="song-container"
+							>
 								<div className="song-details">
 									<img src={el.album.images[0].url} className="cover"></img>
 									<div>
@@ -102,11 +107,7 @@ function SearchResults(props) {
 											)}
 											<p class="song-type">{el.album.album_type}</p>
 											<img src="images/bullet.png" className="bullet"></img>
-											<span className="artist-link">
-												<Link to={`/artist/${el.artists[0].name}`}>
-													{el.artists[0].name}
-												</Link>
-											</span>
+											<p>{el.artists[0].name}</p>
 										</div>
 									</div>
 								</div>

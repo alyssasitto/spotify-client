@@ -12,51 +12,71 @@ export const getCategories = async (num) => {
 		window.location.reload();
 	}
 
-	const categories = await axios.get(`${API_URL}/categories`, {
-		headers: { token: token, limit: num },
-	});
+	try {
+		const categories = await axios.get(`${API_URL}/categories`, {
+			headers: { token: token, limit: num },
+		});
 
-	return categories;
+		return categories;
+	} catch (err) {
+		return err;
+	}
 };
 
 // Function for getting category playlists
 export const getCategoryPlaylists = async (id) => {
-	const categoryPlaylists = await axios.get(`${API_URL}/category_playlists`, {
-		headers: {
-			token: token,
-			id: id,
-		},
-	});
+	try {
+		const categoryPlaylists = await axios.get(`${API_URL}/category_playlists`, {
+			headers: {
+				token: token,
+				id: id,
+			},
+		});
 
-	return categoryPlaylists;
+		return categoryPlaylists;
+	} catch (err) {
+		return err;
+	}
 };
 
 // Funtion for getting top items
 export const getTopItems = async () => {
-	const topItems = await axios.get(`${API_URL}/top_items`, {
-		headers: { token: token },
-	});
+	try {
+		const topItems = await axios.get(`${API_URL}/top_items`, {
+			headers: { token: token },
+		});
 
-	return topItems;
+		return topItems;
+	} catch (err) {
+		return err;
+	}
 };
 
 // Function for getting several playlist items
 export const getPlaylistSongs = async (arr) => {
-	const newArr = await arr.map((el) => {
-		return axios.get(`${API_URL}/playlist_items`, {
-			headers: { token: token, id: el },
+	try {
+		const newArr = await arr.map((el) => {
+			return axios.get(`${API_URL}/playlist_items`, {
+				headers: { token: token, id: el },
+			});
 		});
-	});
-	return Promise.all(newArr);
+		return Promise.all(newArr);
+	} catch (err) {
+		return err;
+	}
 };
 
 // Function for getting one playlist details
 export const getPlaylist = async (id) => {
-	const playlist = await axios.get(`${API_URL}/playlist`, {
-		headers: { token, id },
-	});
+	try {
+		const playlist = await axios.get(`${API_URL}/playlist`, {
+			headers: { token, id },
+		});
 
-	return playlist;
+		return playlist;
+	} catch (err) {
+		return err;
+	}
 };
 
 // Function for getting new releases
@@ -65,38 +85,54 @@ export const getNewReleases = async () => {
 		window.location.reload();
 	}
 
-	const newReleases = await axios.get(`${API_URL}/new_releases`, {
-		headers: { token },
-	});
+	try {
+		const newReleases = await axios.get(`${API_URL}/new_releases`, {
+			headers: { token },
+		});
 
-	return newReleases;
+		return newReleases;
+	} catch (err) {
+		return err;
+	}
 };
 
 // Function for getting users playlists
 export const getUserPlaylists = async () => {
-	const playlists = await axios.get(`${API_URL}/user_playlists`, {
-		headers: { token },
-	});
+	try {
+		const playlists = await axios.get(`${API_URL}/user_playlists`, {
+			headers: { token },
+		});
 
-	return playlists;
+		return playlists;
+	} catch (err) {
+		return err;
+	}
 };
 
 // Function for getting recently listened to songs
 export const getRecentSongs = async () => {
-	const recentSongs = axios.get(`${API_URL}/recently_played`, {
-		headers: { token },
-	});
+	try {
+		const recentSongs = axios.get(`${API_URL}/recently_played`, {
+			headers: { token },
+		});
 
-	return recentSongs;
+		return recentSongs;
+	} catch (err) {
+		return err;
+	}
 };
 
 // Funtion for getting album details
 export const getAlbumDetails = async (id) => {
-	const albumDetails = await axios.get(`${API_URL}/album_details`, {
-		headers: { token, id },
-	});
+	try {
+		const albumDetails = await axios.get(`${API_URL}/album_details`, {
+			headers: { token, id },
+		});
 
-	return albumDetails;
+		return albumDetails;
+	} catch (err) {
+		return err;
+	}
 };
 
 // Function for getting search results
@@ -146,6 +182,38 @@ export const getArtistAlbums = async (id) => {
 		});
 
 		return artistAlbums;
+	} catch (err) {
+		return err;
+	}
+};
+
+// Function for playing a song
+export const playSong = async (context_uri, track_number) => {
+	const device_id = localStorage.getItem("device_id");
+
+	try {
+		const track = track_number - 1;
+
+		const play = await axios.get(`${API_URL}/play_song`, {
+			headers: { token, context_uri, track, device_id },
+		});
+
+		console.log(play);
+
+		return play;
+	} catch (err) {
+		return err;
+	}
+};
+
+// Function for pausing song
+export const pauseSong = async () => {
+	try {
+		const pause = await axios.get(`${API_URL}/pause`, {
+			headers: { token },
+		});
+
+		return pause;
 	} catch (err) {
 		return err;
 	}

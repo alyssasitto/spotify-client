@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { getPlaylist } from "../../utils";
+import { getPlaylist, playSong } from "../../utils";
 import { Link } from "react-router-dom";
 
 require("./PlaylistDetails.css");
@@ -94,8 +94,16 @@ function PlaylistDetails(props) {
 
 					<div className="tracks">
 						{playlist.tracks.items.map((el, index) => {
+							console.log("the playlist", playlist);
+							console.log("the song", el);
 							return (
-								<div key={index} className="track">
+								<div
+									key={index}
+									onClick={async () =>
+										await playSong(el.track.album.uri, el.track.track_number)
+									}
+									className="track"
+								>
 									<div>
 										<p>{el.track.name}</p>
 										<p className="name">

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { playSong } from "../../utils";
 
 require("./RecentSongs.css");
 
@@ -21,7 +21,12 @@ function RecentSongs(props) {
 			<div className="songs">
 				{props.recentSongs.data.items.map((el) => {
 					return (
-						<div className="song-container">
+						<div
+							onClick={async () =>
+								await playSong(el.track.album.uri, el.track.track_number)
+							}
+							className="song-container"
+						>
 							<div className="song-details">
 								<img src={el.track.album.images[0].url} className="cover"></img>
 								<div>
@@ -32,11 +37,7 @@ function RecentSongs(props) {
 										)}
 										<p class="song-type">{el.track.album.album_type}</p>
 										<img src="images/bullet.png" className="bullet"></img>
-										<span className="artist-link">
-											<Link to={`/artist/${el.track.artists[0].name}`}>
-												{el.track.artists[0].name}
-											</Link>
-										</span>
+										<p>{el.track.artists[0].name}</p>
 									</div>
 								</div>
 							</div>

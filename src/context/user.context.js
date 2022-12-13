@@ -15,6 +15,7 @@ function UserProviderWrapper(props) {
 		localStorage.removeItem("spotify_refresh_token");
 		localStorage.removeItem("spotify_token_expires_in");
 		localStorage.removeItem("spotify_token_timestamp");
+		localStorage.removeItem("device_id");
 		localStorage.removeItem("top_items");
 		localStorage.removeItem("new_releases");
 

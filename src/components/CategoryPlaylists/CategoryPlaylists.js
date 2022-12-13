@@ -1,5 +1,4 @@
 import AlbumDetails from "../AlbumDetails/AlbumDetails";
-import { getAlbumDetails } from "../../utils";
 
 import { useState, useEffect } from "react";
 import { getPlaylistSongs } from "../../utils";

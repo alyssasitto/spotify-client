@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAlbumDetails } from "../../utils";
+import { getAlbumDetails, playSong } from "../../utils";
 import { Link } from "react-router-dom";
 
 require("./AlbumDetails.css");
@@ -41,8 +41,6 @@ function AlbumDetails(props) {
 			props.setHeight("height");
 		}
 	}, [props.albumId]);
-
-	console.log("THIS IS THE ALBUM OMG", album);
 
 	return (
 		<div className={"album-details slide-container " + props.showAlbum}>
@@ -100,7 +98,13 @@ function AlbumDetails(props) {
 						{album.tracks.items &&
 							album.tracks.items.map((el, index) => {
 								return (
-									<div key={el.index} className="track">
+									<div
+										onClick={async () =>
+											await playSong(album.uri, el.track_number)
+										}
+										key={el.index}
+										className="track"
+									>
 										<div>
 											<p>{el.name}</p>
 											<p className="name">

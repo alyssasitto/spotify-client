@@ -76,8 +76,6 @@ function Home() {
 		getItems();
 	}, [topItems, newReleases]);
 
-	console.log(topItems);
-
 	return (
 		<div className="home-page">
 			{loading && (
