@@ -1,5 +1,3 @@
-import { useState, useContext } from "react";
-import { UserContext } from "../context/user.context";
 import axios from "axios";
 
 const API_URL = "http://localhost:5005";
@@ -188,14 +186,16 @@ export const getArtistAlbums = async (id) => {
 };
 
 // Function for playing a song
-export const playSong = async (context_uri, track_number) => {
+export const playSong = async (context_uri, track_number, timestampMS) => {
 	const device_id = localStorage.getItem("device_id");
+
+	const timestamp = timestampMS ? timestampMS : 0;
 
 	try {
 		const track = track_number - 1;
 
 		const play = await axios.get(`${API_URL}/play_song`, {
-			headers: { token, context_uri, track, device_id },
+			headers: { token, context_uri, track, device_id, timestamp },
 		});
 
 		console.log(play);
@@ -209,7 +209,13 @@ export const playSong = async (context_uri, track_number) => {
 // Function for pausing song
 export const pauseSong = async () => {
 	try {
-		const pause = await axios.get(`${API_URL}/pause`, {
+		const currentSong = await axios.get(`${API_URL}/currently_playing`, {
+			headers: { token },
+		});
+
+		localStorage.setItem("currently_playing", JSON.stringify(currentSong.data));
+
+		const pause = await axios.get(`${API_URL}/pause_song`, {
 			headers: { token },
 		});
 

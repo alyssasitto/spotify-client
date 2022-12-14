@@ -3,6 +3,7 @@ import { UserContext } from "../../context/user.context";
 import Navbar from "../../components/Navbar/Navbar";
 import RecentSongs from "../../components/RecentSongs/RecentSongs";
 import AlbumDetails from "../../components/AlbumDetails/AlbumDetails";
+import { PlaybarContext } from "../../context/player.context";
 
 import { getTopItems, getNewReleases, getRecentSongs } from "../../utils";
 import HomeSlides from "../../components/HomeSlides/HomeSlides";
@@ -29,6 +30,8 @@ function Home() {
 	const [loading, setLoading] = useState(true);
 	const { logout } = useContext(UserContext);
 	const [error, setError] = useState("");
+
+	const { showPlaybar } = useContext(PlaybarContext);
 
 	// Function for showing recently listened to songs
 	const showRecentSongs = () => {
@@ -77,59 +80,61 @@ function Home() {
 	}, [topItems, newReleases]);
 
 	return (
-		<div className="home-page">
-			{loading && (
-				<div>
-					<p>loading...</p>
-					<button onClick={() => logout()}>logout</button>
-				</div>
-			)}
-			{!loading && (
-				<div>
-					<RecentSongs
-						recentSongs={recentSongs}
-						showRecents={showRecents}
-						setShowRecents={setShowRecents}
-					/>
-
-					<AlbumDetails
-						showAlbum={showAlbum}
-						setShowAlbum={setShowAlbum}
-						albumId={albumId}
-					/>
-
+		<div className={"home-page " + showPlaybar}>
+			<div>
+				{loading && (
 					<div>
-						<div className="greeting">
-							<h1>Good evening</h1>
-							<button onClick={logout}>Logout</button>
-							<img
-								src="images/clock.png"
-								onClick={showRecentSongs}
-								alt="Clock icon"
-								className="small-img"
-							></img>
+						<p>loading...</p>
+						<button onClick={() => logout()}>logout</button>
+					</div>
+				)}
+				{!loading && (
+					<div>
+						<RecentSongs
+							recentSongs={recentSongs}
+							showRecents={showRecents}
+							setShowRecents={setShowRecents}
+						/>
+
+						<AlbumDetails
+							showAlbum={showAlbum}
+							setShowAlbum={setShowAlbum}
+							albumId={albumId}
+						/>
+
+						<div>
+							<div className="greeting">
+								<h1>Good evening</h1>
+								<button onClick={logout}>Logout</button>
+								<img
+									src="images/clock.png"
+									onClick={showRecentSongs}
+									alt="Clock icon"
+									className="small-img"
+								></img>
+							</div>
 						</div>
-					</div>
 
-					<div className="top-items">
-						{topItems &&
-							topItems.body.items.slice(0, 6).map((el, index) => {
-								return (
-									<div
-										key={index}
-										onClick={() => viewAlbum(el.album.id)}
-										className="top-item-container"
-									>
-										<img src={el.album.images[0].url}></img>
-										<p>{el.name}</p>
-									</div>
-								);
-							})}
-					</div>
+						<div className="top-items">
+							{topItems &&
+								topItems.body.items.slice(0, 6).map((el, index) => {
+									return (
+										<div
+											key={index}
+											onClick={() => viewAlbum(el.album.id)}
+											className="top-item-container"
+										>
+											<img src={el.album.images[0].url}></img>
+											<p>{el.name}</p>
+										</div>
+									);
+								})}
+						</div>
 
-					<HomeSlides albums={newReleases} />
-				</div>
-			)}
+						<HomeSlides albums={newReleases} />
+					</div>
+				)}
+			</div>
 			<Navbar />
 		</div>
 	);

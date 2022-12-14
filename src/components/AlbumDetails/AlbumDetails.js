@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { getAlbumDetails, playSong } from "../../utils";
+import { PlaybarContext } from "../../context/player.context";
 import { Link } from "react-router-dom";
 
 require("./AlbumDetails.css");
@@ -8,6 +9,8 @@ function AlbumDetails(props) {
 	const [loading, setLoading] = useState(true);
 	const [album, setAlbum] = useState([]);
 	const [error, setError] = useState("");
+
+	const { clickSong, showPlaybar } = useContext(PlaybarContext);
 
 	const getAlbum = async () => {
 		try {
@@ -22,6 +25,14 @@ function AlbumDetails(props) {
 			setError("Something went wrong");
 			setLoading(false);
 		}
+	};
+
+	const play = async (uri, track, song, album) => {
+		const playResult = await playSong(uri, track);
+
+		clickSong(song, album);
+
+		return playResult;
 	};
 
 	const back = () => {
@@ -43,7 +54,11 @@ function AlbumDetails(props) {
 	}, [props.albumId]);
 
 	return (
-		<div className={"album-details slide-container " + props.showAlbum}>
+		<div
+			className={
+				"album-details slide-container " + props.showAlbum + " " + showPlaybar
+			}
+		>
 			{loading && <p>loading...</p>}
 			<img
 				src="images/left-arrow.svg"
@@ -99,9 +114,7 @@ function AlbumDetails(props) {
 							album.tracks.items.map((el, index) => {
 								return (
 									<div
-										onClick={async () =>
-											await playSong(album.uri, el.track_number)
-										}
+										onClick={() => play(album.uri, el.track_number, el, album)}
 										key={el.index}
 										className="track"
 									>

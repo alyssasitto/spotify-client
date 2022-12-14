@@ -18,6 +18,9 @@ function UserProviderWrapper(props) {
 		localStorage.removeItem("device_id");
 		localStorage.removeItem("top_items");
 		localStorage.removeItem("new_releases");
+		localStorage.removeItem("current_album");
+		localStorage.removeItem("current_song");
+		localStorage.removeItem("currently_playing");
 
 		setToken(undefined);
 		window.location.reload();

@@ -3,6 +3,10 @@
 	padding: 3rem 1rem 8rem;
 }
 
+.search-results.show.show-playbar {
+	padding: 3rem 1rem 14rem;
+}
+
 .search-result-songs {
 	margin-top: 4rem;
 }

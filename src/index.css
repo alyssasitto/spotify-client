@@ -90,3 +90,25 @@ ul {
 	padding: 3rem 1rem 9rem;
 	top: 0;
 }
+
+.app {
+}
+
+@media screen and (min-width: 1000px) {
+	html {
+		/* position: relative; */
+		overflow-x: hidden;
+	}
+
+	.app {
+		position: static;
+		width: 85vw;
+		margin-left: 15vw;
+		overflow-x: hidden;
+	}
+
+	.slide-container {
+		width: 85vw;
+		transition: all 0s;
+	}
+}

@@ -1,7 +1,12 @@
 .search-page {
 	padding: 3rem 1rem 7rem;
-	overflow: scroll;
+	overflow-y: scroll;
+	overflow-x: hidden;
 	height: 100vh;
+}
+
+.search-page.show-playbar {
+	padding: 3rem 1rem 14rem;
 }
 
 .search-page h1 {
@@ -70,4 +75,38 @@
 	bottom: 0;
 	border-radius: 7px;
 	transform: rotate(20deg);
+}
+
+@media screen and (min-width: 1000px) {
+	.categories {
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		gap: 4rem;
+	}
+
+	.category {
+		height: 14rem;
+	}
+
+	.search-page h2 {
+		font-size: 3rem;
+	}
+
+	.search-page h1 {
+		font-size: 3rem;
+	}
+
+	.category p {
+		font-size: 2.2rem;
+	}
+
+	.search-container {
+	}
+
+	.search-page input {
+		padding: 1.5rem;
+	}
+
+	.search-btn {
+		padding: 0 3rem;
+	}
 }

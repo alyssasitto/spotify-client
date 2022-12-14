@@ -8,3 +8,37 @@
 	padding: 0.2rem 0.4rem;
 	display: flex;
 }
+
+.playing-container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	align-items: center;
+}
+
+.playing-helper {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.playing-cover {
+	width: 4.5rem;
+	border-radius: 5px;
+}
+
+.current-artist {
+	color: #a5a4a4;
+}
+
+.buttons {
+	position: relative;
+	width: 3rem;
+	height: 3rem;
+}
+
+.buttons button {
+	background-color: transparent;
+	border: none;
+	position: absolute;
+}

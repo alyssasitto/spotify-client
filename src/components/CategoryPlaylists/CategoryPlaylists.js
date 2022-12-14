@@ -1,7 +1,8 @@
 import AlbumDetails from "../AlbumDetails/AlbumDetails";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { getPlaylistSongs } from "../../utils";
+import { PlaybarContext } from "../../context/player.context";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Pagination } from "swiper";
@@ -18,6 +19,8 @@ function CategoryPlaylists(props) {
 	const [showAlbum, setShowAlbum] = useState("");
 	const [albumId, setAlbumId] = useState("");
 	const [error, setError] = useState(null);
+
+	const { showPlaybar } = useContext(PlaybarContext);
 
 	const back = () => {
 		props.setShowCategoryPlaylists("");
@@ -56,7 +59,10 @@ function CategoryPlaylists(props) {
 	return (
 		<div
 			className={
-				"category-playlists slide-container " + props.showCategoryPlaylists
+				"category-playlists slide-container " +
+				props.showCategoryPlaylists +
+				" " +
+				showPlaybar
 			}
 		>
 			<img

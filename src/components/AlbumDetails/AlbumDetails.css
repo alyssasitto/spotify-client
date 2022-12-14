@@ -3,6 +3,10 @@
 	padding: 3rem 1rem 9rem;
 }
 
+.album-details.show.show-playbar {
+	padding: 3rem 1rem 13rem;
+}
+
 .images {
 	display: flex;
 	justify-content: center;

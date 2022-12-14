@@ -17,6 +17,10 @@
 	background-repeat: no-repeat;
 }
 
+.home-page.show-playbar {
+	padding: 3rem 1rem 14rem;
+}
+
 .home-page h1 {
 	font-size: 2.5rem;
 }
@@ -51,4 +55,17 @@
 	width: 4.5rem;
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
+}
+
+@media screen and (min-width: 1000px) {
+	.home-page {
+	}
+
+	.top-items {
+		font-size: 1.8rem;
+	}
+
+	.top-item-container img {
+		width: 5.5rem;
+	}
 }

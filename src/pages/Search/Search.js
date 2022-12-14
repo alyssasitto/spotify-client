@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
 	getCategories,
 	getCategoryPlaylists,
 	getSearchResults,
 } from "../../utils";
+
+import { PlaybarContext } from "../../context/player.context";
 
 import Navbar from "../../components/Navbar/Navbar";
 import CategoryPlaylists from "../../components/CategoryPlaylists/CategoryPlaylists";
@@ -24,6 +26,8 @@ function Search() {
 	const [categoryCopy, setCategoryCopy] = useState(category);
 	const [categoryName, setCategoryName] = useState("");
 	const [playlists, setPlaylists] = useState([]);
+
+	const { showPlaybar } = useContext(PlaybarContext);
 
 	const colors = [
 		"#E13300",
@@ -119,7 +123,7 @@ function Search() {
 	}, []);
 
 	return (
-		<div className={"search-page "}>
+		<div className={"search-page " + showPlaybar}>
 			{loading && <p>loading...</p>}
 			{!loading && (
 				<div>

@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { getUserPlaylists } from "../../utils";
+import { PlaybarContext } from "../../context/player.context";
 import Navbar from "../../components/Navbar/Navbar";
 import PlaylistDetails from "../../components/PlaylistDetails/PlaylistDetails";
 
@@ -11,6 +12,8 @@ function Library() {
 	const [playlistId, setPlaylistId] = useState("");
 	const [showPlaylist, setShowPlaylist] = useState("");
 	const [error, setError] = useState(null);
+
+	const { showPlaybar } = useContext(PlaybarContext);
 
 	const getItems = async () => {
 		try {
@@ -34,7 +37,7 @@ function Library() {
 
 	console.log("USER PLAYLISTS ===>", playlists);
 	return (
-		<div className={"library-page "}>
+		<div className={"library-page " + showPlaybar}>
 			{loading && <p>loading...</p>}
 			{!loading && (
 				<div>

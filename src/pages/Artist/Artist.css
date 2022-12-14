@@ -6,6 +6,10 @@
 	background-repeat: no-repeat;
 }
 
+.artist-page.show-playbar {
+	padding: 0rem 0rem 13rem;
+}
+
 .artist-heading {
 	font-size: 5rem;
 	padding-left: 1rem;
@@ -51,4 +55,22 @@
 .artist-albums-container,
 .artist-singles-container {
 	margin-top: 2.5rem;
+}
+
+@media screen and (min-width: 500px) {
+	.image-heading {
+		height: 40rem;
+	}
+}
+
+@media screen and (min-width: 600px) {
+	.image-heading {
+		height: 50rem;
+	}
+}
+
+@media screen and (min-width: 700px) {
+	.image-heading {
+		height: 60rem;
+	}
 }

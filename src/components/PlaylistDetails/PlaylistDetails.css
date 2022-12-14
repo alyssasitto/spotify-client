@@ -2,3 +2,7 @@
 	right: 0;
 	padding: 3rem 1rem 5rem;
 }
+
+.playlist-page.show.show-playbar {
+	padding: 3rem 1rem 10rem;
+}

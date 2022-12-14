@@ -4,13 +4,16 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import { UserProviderWrapper } from "./context/user.context";
+import { PlaybarProviderWrapper } from "./context/player.context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<Router>
-		<UserProviderWrapper>
-			<App />
-		</UserProviderWrapper>
+		<PlaybarProviderWrapper>
+			<UserProviderWrapper>
+				<App />
+			</UserProviderWrapper>
+		</PlaybarProviderWrapper>
 	</Router>
 );
 

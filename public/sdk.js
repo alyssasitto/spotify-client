@@ -1,3 +1,5 @@
+// Code for getting the device id from spotify webplayback sdk
+
 window.onSpotifyWebPlaybackSDKReady = () => {
 	const token = localStorage.getItem("spotify_access_token");
 	const player = new Spotify.Player({

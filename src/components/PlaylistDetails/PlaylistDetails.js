@@ -1,6 +1,7 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { getPlaylist, playSong } from "../../utils";
+import { PlaybarContext } from "../../context/player.context";
 import { Link } from "react-router-dom";
 
 require("./PlaylistDetails.css");
@@ -10,8 +11,18 @@ function PlaylistDetails(props) {
 	const [playlist, setPlaylist] = useState([]);
 	const [error, setError] = useState("");
 
+	const { clickSong, showPlaybar } = useContext(PlaybarContext);
+
 	const back = () => {
 		props.setShowPlaylist("");
+	};
+
+	const play = async (uri, track, song) => {
+		const playResult = await playSong(uri, track);
+
+		clickSong(song);
+
+		return playResult;
 	};
 
 	const getPlaylistDetails = async () => {
@@ -38,7 +49,14 @@ function PlaylistDetails(props) {
 	console.log("THIS IS THE PLAYLIST", playlist);
 
 	return (
-		<div className={"playlist-page slide-container " + props.showPlaylist}>
+		<div
+			className={
+				"playlist-page slide-container " +
+				props.showPlaylist +
+				" " +
+				showPlaybar
+			}
+		>
 			<img
 				src="images/left-arrow.svg"
 				onClick={back}
@@ -99,8 +117,8 @@ function PlaylistDetails(props) {
 							return (
 								<div
 									key={index}
-									onClick={async () =>
-										await playSong(el.track.album.uri, el.track.track_number)
+									onClick={() =>
+										play(el.track.album.uri, el.track.track_number, el.track)
 									}
 									className="track"
 								>

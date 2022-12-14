@@ -1,12 +1,15 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { PlaybarContext } from "../../context/player.context";
 import Player from "../Player/Player";
 
 require("./Navbar.css");
 
 function Navbar() {
+	const { showPlaybar } = useContext(PlaybarContext);
 	return (
-		<div className={"navbar "}>
-			<Player />
+		<div className={"navbar " + showPlaybar}>
+			{showPlaybar.length > 0 && <Player />}
 
 			<div>
 				<ul>

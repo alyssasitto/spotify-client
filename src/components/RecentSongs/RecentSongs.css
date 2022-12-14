@@ -4,7 +4,7 @@
 }
 
 .recent-songs.show.show-playbar {
-	padding: 3rem 1rem 15rem;
+	padding: 3rem 1rem 13rem;
 }
 
 .recent-songs h1 {
@@ -50,4 +50,10 @@
 .track-name {
 	margin-bottom: 0.5rem;
 	font-size: 1.8rem;
+}
+
+@media screen and (min-width: 1000px) {
+	.recent-songs.show {
+		overflow-x: hidden;
+	}
 }

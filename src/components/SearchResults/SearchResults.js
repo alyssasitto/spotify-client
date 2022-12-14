@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useSearchParams } from "react-router-dom";
 import { getArtist, getSearchResults, playSong } from "../../utils";
 import { Link } from "react-router-dom";
-
+import { PlaybarContext } from "../../context/player.context";
 import { useNavigate } from "react-router-dom";
 
 require("./SearchResults.css");
@@ -12,8 +12,19 @@ function SearchResults(props) {
 	const [artist, setArtist] = useState([]);
 	const [searchResults, setSearchResults] = useState([]);
 	const [error, setError] = useState("");
+
+	const { clickSong, showPlaybar } = useContext(PlaybarContext);
+
 	const back = () => {
 		props.setShowSearchResults("");
+	};
+
+	const play = async (uri, track, song) => {
+		const playResult = await playSong(uri, track);
+
+		clickSong(song);
+
+		return playResult;
 	};
 
 	const navigate = useNavigate();
@@ -53,7 +64,10 @@ function SearchResults(props) {
 	return (
 		<div
 			className={
-				"search-results recent-songs slide-container " + props.showSearchResults
+				"search-results recent-songs slide-container " +
+				props.showSearchResults +
+				" " +
+				showPlaybar
 			}
 		>
 			<img
@@ -89,9 +103,7 @@ function SearchResults(props) {
 					{searchResults.map((el) => {
 						return (
 							<div
-								onClick={async () =>
-									await playSong(el.album.uri, el.track_number)
-								}
+								onClick={() => play(el.album.uri, el.track_number, el)}
 								className="song-container"
 							>
 								<div className="song-details">

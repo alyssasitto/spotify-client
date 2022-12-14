@@ -1,14 +1,30 @@
+import { useContext } from "react";
 import { playSong } from "../../utils";
+import { PlaybarContext } from "../../context/player.context";
 
 require("./RecentSongs.css");
 
 function RecentSongs(props) {
+	const { clickSong, showPlaybar } = useContext(PlaybarContext);
+
 	const back = () => {
 		props.setShowRecents("");
 	};
 
+	const play = async (uri, track, song) => {
+		const playResult = await playSong(uri, track);
+
+		clickSong(song);
+
+		return playResult;
+	};
+
 	return (
-		<div className={"recent-songs slide-container " + props.showRecents}>
+		<div
+			className={
+				"recent-songs slide-container " + props.showRecents + " " + showPlaybar
+			}
+		>
 			<div className="heading">
 				<img
 					src="images/left-arrow.svg"
@@ -22,8 +38,8 @@ function RecentSongs(props) {
 				{props.recentSongs.data.items.map((el) => {
 					return (
 						<div
-							onClick={async () =>
-								await playSong(el.track.album.uri, el.track.track_number)
+							onClick={() =>
+								play(el.track.album.uri, el.track.track_number, el.track)
 							}
 							className="song-container"
 						>

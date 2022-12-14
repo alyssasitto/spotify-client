@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { getArtist, getArtistAlbums, getArtistTracks } from "../../utils";
+import { PlaybarContext } from "../../context/player.context";
 import Navbar from "../../components/Navbar/Navbar";
 import AlbumDetails from "../../components/AlbumDetails/AlbumDetails";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +17,8 @@ function Artist() {
 	const [showAlbum, setShowAlbum] = useState("");
 	const [albumId, setAlbumId] = useState("");
 	const [loading, setLoading] = useState(true);
+
+	const { showPlaybar } = useContext(PlaybarContext);
 
 	const param = useParams();
 
@@ -91,7 +94,7 @@ function Artist() {
 	console.log("THESE ARE THE ALBUMS", albumsArr);
 
 	return (
-		<div className="artist-page">
+		<div className={"artist-page " + showPlaybar}>
 			<div className="artist-back-btn">
 				<img
 					src="images/left-arrow.svg"
