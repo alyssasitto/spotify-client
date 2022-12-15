@@ -76,7 +76,7 @@ function PlaylistDetails(props) {
 				</div>
 			)}
 			{!loading && (
-				<div>
+				<div className="content">
 					<div className="images">
 						<img
 							src="images/left-arrow.svg"
@@ -84,13 +84,17 @@ function PlaylistDetails(props) {
 							className="left-arrow"
 							alt="Left arrow icon"
 						></img>
-						<img src={playlist.images[0].url} className="album-image"></img>
+						{playlist.images && playlist.images.length > 0 && (
+							<img src={playlist.images[0].url} className="album-image"></img>
+						)}
 					</div>
 
 					<div className="details">
 						<h1>{playlist.name}</h1>
 						<div className="artist">
-							<img src={playlist.images[0].url} className="artist-img"></img>
+							{playlist.images && playlist.images.length > 0 && (
+								<img src={playlist.images[0].url} className="artist-img"></img>
+							)}
 							<p>{playlist.owner.display_name}</p>
 						</div>
 						<div className="options">

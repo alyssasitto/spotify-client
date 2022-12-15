@@ -24,13 +24,15 @@ function Player() {
 					)}
 
 					{currentAlbum !== undefined && currentAlbum.images && (
-						<img
-							src={currentAlbum.images[0].url}
+						<div
+							style={{
+								backgroundImage: "url(" + currentAlbum.images[0].url + ")",
+							}}
 							className="playing-cover"
-						></img>
+						></div>
 					)}
-					<div>
-						<p>{currentSong.name}</p>
+					<div className="details-helper">
+						<p className="current-song">{currentSong.name}</p>
 						<p className="current-artist">{currentSong.artists[0].name}</p>
 					</div>
 				</div>

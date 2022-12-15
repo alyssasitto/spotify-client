@@ -2,14 +2,15 @@
 	height: 100vh;
 	overflow-y: scroll;
 	overflow-x: hidden;
-	background-image: linear-gradient(
+	/* background-image: linear-gradient(
 		to bottom,
 		#1d0f42,
 		#191137,
 		#17122b,
 		#15121f,
 		#121212
-	);
+	); */
+	background-color: #131216;
 	padding: 3rem 1rem 8rem;
 }
 
@@ -40,4 +41,40 @@
 
 .playlist-img {
 	width: 5rem;
+}
+
+@media screen and (min-width: 1000px) {
+	.library-page {
+		padding: 3rem 4rem 14rem;
+	}
+
+	.library-page.show-playbar {
+		padding: 3rem 4rem 14rem;
+	}
+
+	.library-page h1 {
+		font-size: 3.5rem;
+	}
+
+	.playlists {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		gap: 5rem;
+	}
+
+	.playlist {
+		flex-direction: column;
+		background-color: #202124;
+		height: 30rem;
+		width: 23rem;
+		border-radius: 10px;
+		justify-content: center;
+	}
+
+	.playlist-img {
+		/* width: 14rem; */
+		border-radius: 5px;
+		width: 17rem;
+		height: 17rem;
+	}
 }

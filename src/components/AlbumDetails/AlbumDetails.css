@@ -117,3 +117,13 @@
 .artist-link:hover {
 	border-bottom: 2px solid #fff;
 }
+
+@media screen and (min-width: 1000px) {
+	.album-details.show {
+		padding: 3rem 8rem 9rem;
+	}
+
+	.album-details.show.show-playbar {
+		padding: 3rem 8rem 13rem;
+	}
+}

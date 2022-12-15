@@ -68,7 +68,7 @@ function CategoryPlaylists(props) {
 			<img
 				src="images/left-arrow.svg"
 				onClick={back}
-				className="left-arrow"
+				className="left-arrow margin-helper"
 				alt="Left arrow icon"
 			></img>
 			{loading && (

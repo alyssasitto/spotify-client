@@ -18,7 +18,14 @@ function Library() {
 	const getItems = async () => {
 		try {
 			const playlistItems = await getUserPlaylists();
-			setPlaylists(playlistItems.data.body.items);
+
+			const filteredPlaylists = playlistItems.data.body.items.filter((el) => {
+				if (el.images.length > 0) {
+					return el;
+				}
+			});
+
+			setPlaylists(filteredPlaylists);
 
 			setLoading(false);
 		} catch {
@@ -35,7 +42,8 @@ function Library() {
 		getItems();
 	}, []);
 
-	console.log("USER PLAYLISTS ===>", playlists);
+	console.log("THE PLAYLISTS ===>", playlists);
+
 	return (
 		<div className={"library-page " + showPlaybar}>
 			{loading && <p>loading...</p>}

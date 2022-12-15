@@ -55,5 +55,10 @@
 @media screen and (min-width: 1000px) {
 	.recent-songs.show {
 		overflow-x: hidden;
+		padding: 3rem 8rem 8rem;
+	}
+
+	.recent-songs h1 {
+		font-size: 3rem !important;
 	}
 }

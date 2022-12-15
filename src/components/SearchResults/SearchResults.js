@@ -73,7 +73,7 @@ function SearchResults(props) {
 			<img
 				src="images/left-arrow.svg"
 				onClick={back}
-				className="left-arrow"
+				className="left-arrow custom-arrow"
 				alt="Left arrow icon"
 			></img>
 
@@ -119,7 +119,11 @@ function SearchResults(props) {
 											)}
 											<p class="song-type">{el.album.album_type}</p>
 											<img src="images/bullet.png" className="bullet"></img>
-											<p>{el.artists[0].name}</p>
+											<span className="artist-link">
+												<Link to={`/artist/${el.artists[0].name}`}>
+													{el.artists[0].name}
+												</Link>
+											</span>
 										</div>
 									</div>
 								</div>

@@ -25,6 +25,7 @@ function App() {
 						</IsLoggedOut>
 					}
 				></Route>
+
 				<Route
 					path="/home"
 					element={

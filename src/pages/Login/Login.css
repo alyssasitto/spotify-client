@@ -21,3 +21,19 @@
 	border-radius: 99px;
 	text-transform: uppercase;
 }
+
+@media screen and (min-width: 1000px) {
+	.login-page {
+		position: relative;
+		margin-left: -15vw;
+	}
+
+	.login-page img {
+		width: 50%;
+	}
+
+	.login-page a {
+		font-size: 3rem;
+		padding: 2rem;
+	}
+}

@@ -28,3 +28,19 @@
 .small-right-arrow {
 	width: 1rem;
 }
+
+@media screen and (min-width: 1000px) {
+	.search-results.show {
+		right: 0;
+		padding: 3rem 6rem 8rem;
+	}
+
+	.search-results.show.show-playbar {
+		right: 0;
+		padding: 3rem 6rem 8rem;
+	}
+
+	.custom {
+		left: 7rem;
+	}
+}

@@ -6,3 +6,9 @@
 .playlist-page.show.show-playbar {
 	padding: 3rem 1rem 10rem;
 }
+
+@media screen and (min-width: 1000px) {
+	.content {
+		padding: 0 8rem;
+	}
+}

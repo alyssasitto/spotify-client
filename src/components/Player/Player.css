@@ -24,6 +24,9 @@
 
 .playing-cover {
 	width: 4.5rem;
+	height: 4.5rem;
+	background-position: center;
+	background-size: cover;
 	border-radius: 5px;
 }
 
@@ -41,4 +44,33 @@
 	background-color: transparent;
 	border: none;
 	position: absolute;
+}
+
+@media screen and (min-width: 1000px) {
+	.player-container {
+		position: absolute;
+		bottom: 0;
+		width: 100vw;
+		height: 8rem;
+		left: 0;
+		margin-bottom: 0;
+	}
+
+	.details-helper {
+		padding-left: 5rem;
+		font-size: 1.8rem;
+	}
+
+	.playing-cover {
+		width: 15vw;
+		height: 30rem;
+	}
+
+	.current-song {
+		margin-bottom: 1rem;
+	}
+
+	.buttons {
+		margin-right: 5rem;
+	}
 }

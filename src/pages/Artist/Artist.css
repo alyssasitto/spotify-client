@@ -69,8 +69,13 @@
 	}
 }
 
-@media screen and (min-width: 700px) {
-	.image-heading {
-		height: 60rem;
+@media screen and (min-width: 1000px) {
+	.top-artist-songs-container {
+		padding: 0 8rem;
+	}
+
+	.top-artist-songs-container h2 {
+		margin-bottom: 1.5rem;
+		font-size: 3.5rem;
 	}
 }
