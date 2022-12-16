@@ -99,11 +99,18 @@ function Artist() {
 				<img
 					src="images/left-arrow.svg"
 					onClick={back}
-					className="left-arrow"
+					className="artist-left-arrow"
 					alt="Left arrow icon"
 				></img>
 			</div>
-			{loading && <p>loading...</p>}
+			{loading && (
+				<div className="loading-page">
+					<img
+						src="images/spotify-loading-gif.gif"
+						className="loading-icon"
+					></img>
+				</div>
+			)}
 			{!loading && artist && (
 				<div>
 					<AlbumDetails

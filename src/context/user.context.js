@@ -16,6 +16,7 @@ function UserProviderWrapper(props) {
 		localStorage.removeItem("spotify_token_expires_in");
 		localStorage.removeItem("spotify_token_timestamp");
 		localStorage.removeItem("device_id");
+		localStorage.removeItem("time");
 		localStorage.removeItem("top_items");
 		localStorage.removeItem("new_releases");
 		localStorage.removeItem("current_album");
@@ -97,6 +98,11 @@ function UserProviderWrapper(props) {
 				"spotify_token_expires_in",
 				urlParams.get("expires_in")
 			);
+
+			// Save the time of signing in to local storage
+			const date = new Date();
+			const time = date.toLocaleTimeString();
+			localStorage.setItem("time", time);
 
 			// Add a timestamp with the current time to comare to the expires in time to determine if the access token is expired
 			localStorage.setItem("spotify_token_timestamp", Date.now());

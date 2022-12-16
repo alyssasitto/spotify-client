@@ -124,7 +124,14 @@ function Search() {
 
 	return (
 		<div className={"search-page " + showPlaybar}>
-			{loading && <p>loading...</p>}
+			{loading && (
+				<div className="loading-page">
+					<img
+						src="images/spotify-loading-gif.gif"
+						className="loading-icon"
+					></img>
+				</div>
+			)}
 			{!loading && (
 				<div>
 					{category && (

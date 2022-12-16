@@ -92,7 +92,26 @@ ul {
 	top: 0;
 }
 
-.app {
+.loading-page {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	padding-bottom: 10rem;
+}
+
+.loading-icon {
+	width: 5rem;
+}
+
+::-webkit-scrollbar {
+	width: 0px;
+}
+
+@media screen and (min-width: 700px) {
+	.loading-icon {
+		width: 8rem;
+	}
 }
 
 @media screen and (min-width: 1000px) {
@@ -114,9 +133,5 @@ ul {
 
 	.left-arrow {
 		left: 7rem;
-	}
-
-	::-webkit-scrollbar {
-		width: 0px;
 	}
 }

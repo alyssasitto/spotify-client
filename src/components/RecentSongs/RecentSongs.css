@@ -61,4 +61,8 @@
 	.recent-songs h1 {
 		font-size: 3rem !important;
 	}
+
+	.recents-arrow {
+		left: 0;
+	}
 }

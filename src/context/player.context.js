@@ -10,7 +10,6 @@ function PlaybarProviderWrapper(props) {
 	const [playState, setPlayState] = useState(false);
 
 	const clickSong = (song, album) => {
-		console.log("THIS IS THE SONG", song);
 		setCurrentSong(song);
 		setCurrentAlbum(album);
 		localStorage.setItem("current_song", JSON.stringify(song));
@@ -32,7 +31,6 @@ function PlaybarProviderWrapper(props) {
 		const timestamp = JSON.parse(localStorage.getItem("currently_playing")).body
 			.progress_ms;
 
-		console.log("THE TIMESTAMP", timestamp);
 		const result = await playSong(uri, track, timestamp);
 
 		setPlayState(true);

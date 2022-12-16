@@ -29,7 +29,7 @@ function RecentSongs(props) {
 				<img
 					src="images/left-arrow.svg"
 					onClick={back}
-					className="left-arrow"
+					className="left-arrow recents-arrow"
 					alt="Left arrow icon"
 				></img>
 				<h1>Recently played</h1>

@@ -59,13 +59,21 @@ function AlbumDetails(props) {
 				"album-details slide-container " + props.showAlbum + " " + showPlaybar
 			}
 		>
-			{loading && <p>loading...</p>}
 			<img
 				src="images/left-arrow.svg"
 				onClick={back}
 				className="left-arrow"
 				alt="Left arrow icon"
 			></img>
+			{loading && (
+				<div className="loading-page">
+					<img
+						src="images/spotify-loading-gif.gif"
+						className="loading-icon"
+					></img>
+				</div>
+			)}
+
 			{!loading && album && (
 				<div>
 					<div className="images">

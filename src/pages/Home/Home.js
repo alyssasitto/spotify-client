@@ -23,19 +23,39 @@ function Home() {
 			? JSON.parse(localStorage.getItem("new_releases"))
 			: []
 	);
+
 	const [recentSongs, setRecentSongs] = useState([]);
 	const [showRecents, setShowRecents] = useState("");
 	const [showAlbum, setShowAlbum] = useState("");
 	const [albumId, setAlbumId] = useState("");
 	const [loading, setLoading] = useState(true);
-	const { logout } = useContext(UserContext);
 	const [error, setError] = useState("");
 
+	const time = localStorage.getItem("time");
+
+	const { logout } = useContext(UserContext);
 	const { showPlaybar } = useContext(PlaybarContext);
 
 	// Function for showing recently listened to songs
 	const showRecentSongs = () => {
 		setShowRecents("show");
+	};
+
+	const getGreeting = (date) => {
+		const timeHour = date.slice(0, 1);
+		const amOrpm = date.slice(date.length - 2);
+
+		if (amOrpm.toLowerCase() === "am") {
+			return "Good morning";
+		}
+
+		if (Number(timeHour) === 12 || Number(timeHour) < 7) {
+			return "Good afternoon";
+		}
+
+		if (Number(timeHour) > 7) {
+			return "Good evening";
+		}
 	};
 
 	// Call function to get category playlists
@@ -83,9 +103,11 @@ function Home() {
 		<div className={"home-page " + showPlaybar}>
 			<div>
 				{loading && (
-					<div>
-						<p>loading...</p>
-						<button onClick={() => logout()}>logout</button>
+					<div className="loading-page">
+						<img
+							src="images/spotify-loading-gif.gif"
+							className="loading-icon"
+						></img>
 					</div>
 				)}
 				{!loading && (
@@ -104,8 +126,8 @@ function Home() {
 
 						<div>
 							<div className="greeting">
-								<h1>Good evening</h1>
-								<button onClick={logout}>Logout</button>
+								<h1>{getGreeting(time)}</h1>
+
 								<img
 									src="images/clock.png"
 									onClick={showRecentSongs}

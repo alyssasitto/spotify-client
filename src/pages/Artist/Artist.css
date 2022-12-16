@@ -41,8 +41,8 @@
 
 .artist-back-btn {
 	background-color: rgba(0, 0, 0, 0.477);
-	height: 3.5rem;
-	width: 3.5rem;
+	height: 4rem;
+	width: 4rem;
 	position: absolute;
 	top: 1.5rem;
 	left: 1.5rem;
@@ -55,6 +55,10 @@
 .artist-albums-container,
 .artist-singles-container {
 	margin-top: 2.5rem;
+}
+
+.artist-left-arrow {
+	width: 3rem;
 }
 
 @media screen and (min-width: 500px) {
@@ -77,5 +81,16 @@
 	.top-artist-songs-container h2 {
 		margin-bottom: 1.5rem;
 		font-size: 3.5rem;
+	}
+
+	.artist-back-btn {
+		left: 20vw;
+		height: 5rem;
+		width: 5rem;
+	}
+
+	.artist-heading {
+		font-size: 8rem;
+		padding-left: 8rem;
 	}
 }

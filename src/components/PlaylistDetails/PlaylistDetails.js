@@ -46,8 +46,6 @@ function PlaylistDetails(props) {
 		}
 	}, [props.playlistId]);
 
-	console.log("THIS IS THE PLAYLIST", playlist);
-
 	return (
 		<div
 			className={
@@ -65,14 +63,11 @@ function PlaylistDetails(props) {
 			></img>
 
 			{loading && (
-				<div>
+				<div className="loading-page">
 					<img
-						src="images/left-arrow.svg"
-						onClick={back}
-						className="left-arrow"
-						alt="Left arrow icon"
+						src="images/spotify-loading-gif.gif"
+						className="loading-icon"
 					></img>
-					<p>loading...</p>
 				</div>
 			)}
 			{!loading && (

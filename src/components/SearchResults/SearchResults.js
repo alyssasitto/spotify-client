@@ -77,7 +77,14 @@ function SearchResults(props) {
 				alt="Left arrow icon"
 			></img>
 
-			{loading && <p>loading...</p>}
+			{loading && (
+				<div className="loading-page">
+					<img
+						src="images/spotify-loading-gif.gif"
+						className="loading-icon"
+					></img>
+				</div>
+			)}
 			{!loading && searchResults && (
 				<div className="songs search-result-songs">
 					{artist &&

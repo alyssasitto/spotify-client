@@ -64,6 +64,7 @@
 	.playing-cover {
 		width: 15vw;
 		height: 30rem;
+		background-position: bottom;
 	}
 
 	.current-song {

@@ -68,15 +68,17 @@ function CategoryPlaylists(props) {
 			<img
 				src="images/left-arrow.svg"
 				onClick={back}
-				className="left-arrow margin-helper"
+				className="left-arrow"
 				alt="Left arrow icon"
 			></img>
 			{loading && (
-				<div>
-					<p>loading...</p>
+				<div className="loading-page">
+					<img
+						src="images/spotify-loading-gif.gif"
+						className="loading-icon"
+					></img>
 				</div>
 			)}
-
 			{!loading && (
 				<div>
 					<AlbumDetails
