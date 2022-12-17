@@ -1,6 +1,15 @@
+import { useContext, useEffect } from "react";
+import { UserContext } from "../../context/user.context";
+
 require("./Error.css");
 
 function Error() {
+	const { getAccessToken } = useContext(UserContext);
+
+	useEffect(() => {
+		getAccessToken();
+	}, []);
+
 	return (
 		<div className="error-page">
 			<img src="images/error-logo.png" className="error-logo"></img>

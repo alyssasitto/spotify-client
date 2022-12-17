@@ -8,6 +8,10 @@ import { PlaybarContext } from "../../context/player.context";
 import { getTopItems, getNewReleases, getRecentSongs } from "../../utils";
 import HomeSlides from "../../components/HomeSlides/HomeSlides";
 
+import axios from "axios";
+
+const API_URL = "http://localhost:5005";
+
 require("./Home.css");
 
 function Home() {
@@ -33,7 +37,7 @@ function Home() {
 
 	const time = localStorage.getItem("time");
 
-	const { logout } = useContext(UserContext);
+	const { logout, getAccessToken, refreshToken } = useContext(UserContext);
 	const { showPlaybar } = useContext(PlaybarContext);
 
 	// Function for showing recently listened to songs
@@ -42,7 +46,8 @@ function Home() {
 	};
 
 	const getGreeting = (date) => {
-		const timeHour = date.slice(0, 1);
+		const timeHour =
+			Number(date.slice(0, 2)) !== NaN ? date.slice(0, 1) : date.slice(0, 1);
 		const amOrpm = date.slice(date.length - 2);
 
 		if (amOrpm.toLowerCase() === "am") {
@@ -56,6 +61,10 @@ function Home() {
 		if (Number(timeHour) > 7) {
 			return "Good evening";
 		}
+
+		console.log("THIS IS THE HOkUR", timeHour);
+
+		return "Hello";
 	};
 
 	// Call function to get category playlists
@@ -96,6 +105,7 @@ function Home() {
 	};
 
 	useEffect(() => {
+		getAccessToken();
 		getItems();
 	}, [topItems, newReleases]);
 
@@ -108,6 +118,7 @@ function Home() {
 							src="images/spotify-loading-gif.gif"
 							className="loading-icon"
 						></img>
+						<button onClick={logout}>logout</button>
 					</div>
 				)}
 				{!loading && (
@@ -132,7 +143,7 @@ function Home() {
 									src="images/clock.png"
 									onClick={showRecentSongs}
 									alt="Clock icon"
-									className="small-img"
+									className="clock"
 								></img>
 							</div>
 						</div>

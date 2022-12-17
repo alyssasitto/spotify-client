@@ -5,6 +5,7 @@ import { PlaybarContext } from "../../context/player.context";
 import Navbar from "../../components/Navbar/Navbar";
 import AlbumDetails from "../../components/AlbumDetails/AlbumDetails";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/user.context";
 
 require("./Artist.css");
 
@@ -19,6 +20,7 @@ function Artist() {
 	const [loading, setLoading] = useState(true);
 
 	const { showPlaybar } = useContext(PlaybarContext);
+	const { getAccessToken } = useContext(UserContext);
 
 	const param = useParams();
 
@@ -81,6 +83,7 @@ function Artist() {
 	};
 
 	useEffect(() => {
+		getAccessToken();
 		getArtistDetails();
 	}, []);
 

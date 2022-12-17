@@ -35,6 +35,7 @@
 
 .swiper-slide {
 	text-align: center;
+	overflow-x: hidden;
 	font-size: 18px;
 	width: 20rem !important;
 	/* Center slide text vertically */

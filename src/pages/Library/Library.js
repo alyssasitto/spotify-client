@@ -14,7 +14,7 @@ function Library() {
 	const [showPlaylist, setShowPlaylist] = useState("");
 	const [error, setError] = useState(null);
 
-	const { logout } = useContext(UserContext);
+	const { logout, getAccessToken } = useContext(UserContext);
 
 	const { showPlaybar } = useContext(PlaybarContext);
 
@@ -42,6 +42,7 @@ function Library() {
 	};
 
 	useEffect(() => {
+		getAccessToken();
 		getItems();
 	}, []);
 

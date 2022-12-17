@@ -11,6 +11,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import CategoryPlaylists from "../../components/CategoryPlaylists/CategoryPlaylists";
 import axios from "axios";
 import SearchResults from "../../components/SearchResults/SearchResults";
+import { UserContext } from "../../context/user.context";
 
 require("./Search.css");
 // import Slides from "../../components/Slides/Slides";
@@ -28,6 +29,7 @@ function Search() {
 	const [playlists, setPlaylists] = useState([]);
 
 	const { showPlaybar } = useContext(PlaybarContext);
+	const { getAccessToken } = useContext(UserContext);
 
 	const colors = [
 		"#E13300",
@@ -93,6 +95,8 @@ function Search() {
 	];
 
 	const getItems = async () => {
+		getAccessToken();
+
 		const result = await getCategories(50);
 		setCategories(result);
 

@@ -24,7 +24,7 @@
 	margin-bottom: 2rem;
 }
 
-.small-img {
+.clock {
 	width: 3rem;
 }
 
@@ -53,6 +53,10 @@
 	.home-page {
 	}
 
+	.home-page h1 {
+		font-size: 3rem;
+	}
+
 	.top-items {
 		font-size: 1.8rem;
 	}
@@ -63,5 +67,9 @@
 
 	.top-items {
 		grid-template-columns: 1fr 1fr 1fr;
+	}
+
+	.clock {
+		width: 4rem;
 	}
 }
