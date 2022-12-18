@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 
 const UserContext = createContext();
 
-const API_URL = "http://localhost:5005";
+const API_URL = process.env.REACT_APP_API_URL;
 
 function UserProviderWrapper(props) {
 	const [token, setToken] = useState(undefined);

@@ -31,10 +31,6 @@
 }
 
 @media screen and (min-width: 700px) {
-	.error-page {
-		margin-left: -15vw;
-	}
-
 	.error-logo {
 		width: 10rem;
 	}
@@ -51,5 +47,11 @@
 
 	.error-page a {
 		font-size: 3rem;
+	}
+}
+
+@media screen and (min-width: 1000px) {
+	.error-page {
+		margin-left: -15vw;
 	}
 }

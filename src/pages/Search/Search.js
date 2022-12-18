@@ -1,30 +1,24 @@
 import { useState, useEffect, useContext } from "react";
-import {
-	getCategories,
-	getCategoryPlaylists,
-	getSearchResults,
-} from "../../utils";
-
-import { PlaybarContext } from "../../context/player.context";
+import { getCategories, getCategoryPlaylists } from "../../utils";
 
 import Navbar from "../../components/Navbar/Navbar";
 import CategoryPlaylists from "../../components/CategoryPlaylists/CategoryPlaylists";
-import axios from "axios";
 import SearchResults from "../../components/SearchResults/SearchResults";
+
 import { UserContext } from "../../context/user.context";
+import { PlaybarContext } from "../../context/player.context";
 
 require("./Search.css");
-// import Slides from "../../components/Slides/Slides";
 
 function Search() {
 	const [categories, setCategories] = useState([]);
 
 	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(false);
 	const [searchItem, setSearchItem] = useState("");
 	const [showSearchResults, setShowSearchResults] = useState("");
 	const [showCategoryPlaylists, setShowCategoryPlaylists] = useState("");
 	const [category, setCategory] = useState([]);
-	const [categoryCopy, setCategoryCopy] = useState(category);
 	const [categoryName, setCategoryName] = useState("");
 	const [playlists, setPlaylists] = useState([]);
 
@@ -94,35 +88,46 @@ function Search() {
 		"#056952",
 	];
 
+	// Get the category options
 	const getItems = async () => {
-		getAccessToken();
+		try {
+			const result = await getCategories(50);
+			setCategories(result);
 
-		const result = await getCategories(50);
-		setCategories(result);
-
-		setLoading(false);
+			setLoading(false);
+		} catch (err) {
+			setLoading(false);
+			setError(true);
+		}
 	};
 
+	// Function for viewing the individual category playlists
 	const viewCategoryPlaylists = async (id, name) => {
-		console.log(id);
-		const details = await getCategoryPlaylists(id);
-		setCategory(details.data.body.playlists.items.slice(0, 8));
-		setCategoryName(name);
+		try {
+			const details = await getCategoryPlaylists(id);
+			setCategory(details.data.body.playlists.items.slice(0, 8));
+			setCategoryName(name);
 
-		setShowCategoryPlaylists("show");
+			setShowCategoryPlaylists("show");
+		} catch (err) {
+			setLoading(false);
+			setError(true);
+		}
 	};
 
+	// Function for displaying the search results slide
 	const search = (e) => {
 		e.preventDefault();
-
 		setShowSearchResults("show");
 	};
 
+	// Function for handling the search a user types in
 	const handleSearch = (e) => {
 		setSearchItem(e.target.value);
 	};
 
 	useEffect(() => {
+		getAccessToken();
 		getItems();
 	}, []);
 
@@ -188,6 +193,9 @@ function Search() {
 					</div>
 				</div>
 			)}
+
+			{error && <p>Hmmm something went wrong...</p>}
+
 			<Navbar />
 		</div>
 	);

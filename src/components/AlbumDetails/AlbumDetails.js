@@ -22,7 +22,7 @@ function AlbumDetails(props) {
 
 			setLoading(false);
 		} catch {
-			setError("Something went wrong");
+			setError(true);
 			setLoading(false);
 		}
 	};
@@ -154,7 +154,7 @@ function AlbumDetails(props) {
 					</footer>
 				</div>
 			)}
-			{error && <p>{error}</p>}
+			{error && <p>Hmmm something went wrong...</p>}
 		</div>
 	);
 }

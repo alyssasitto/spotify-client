@@ -9,7 +9,7 @@ require("./PlaylistDetails.css");
 function PlaylistDetails(props) {
 	const [loading, setLoading] = useState(true);
 	const [playlist, setPlaylist] = useState([]);
-	const [error, setError] = useState("");
+	const [error, setError] = useState(false);
 
 	const { clickSong, showPlaybar } = useContext(PlaybarContext);
 
@@ -36,7 +36,8 @@ function PlaylistDetails(props) {
 
 			setLoading(false);
 		} catch {
-			setError("Something went wrong");
+			setLoading(false);
+			setError(true);
 		}
 	};
 
@@ -146,7 +147,7 @@ function PlaylistDetails(props) {
 				</div>
 			)}
 
-			{error && <p>{error}</p>}
+			{error && <p>Hmmm something went wrong...</p>}
 		</div>
 	);
 }

@@ -12,16 +12,18 @@ function Library() {
 	const [loading, setLoading] = useState(true);
 	const [playlistId, setPlaylistId] = useState("");
 	const [showPlaylist, setShowPlaylist] = useState("");
-	const [error, setError] = useState(null);
+	const [error, setError] = useState(false);
 
 	const { logout, getAccessToken } = useContext(UserContext);
 
 	const { showPlaybar } = useContext(PlaybarContext);
 
+	// Get the playlist items
 	const getItems = async () => {
 		try {
 			const playlistItems = await getUserPlaylists();
 
+			// Return only the playlists that have images
 			const filteredPlaylists = playlistItems.data.body.items.filter((el) => {
 				if (el.images.length > 0) {
 					return el;
@@ -32,10 +34,12 @@ function Library() {
 
 			setLoading(false);
 		} catch {
-			setError("something went wrong");
+			setLoading(false);
+			setError(true);
 		}
 	};
 
+	// Function for opening slide to view the playlists details
 	const viewPlaylist = (id) => {
 		setShowPlaylist("show");
 		setPlaylistId(id);
@@ -99,6 +103,8 @@ function Library() {
 					</div>
 				</div>
 			)}
+
+			{error && <p>Hmmm something went wrong...</p>}
 			<Navbar />
 		</div>
 	);

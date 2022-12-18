@@ -8,10 +8,6 @@ import { PlaybarContext } from "../../context/player.context";
 import { getTopItems, getNewReleases, getRecentSongs } from "../../utils";
 import HomeSlides from "../../components/HomeSlides/HomeSlides";
 
-import axios from "axios";
-
-const API_URL = "http://localhost:5005";
-
 require("./Home.css");
 
 function Home() {
@@ -33,11 +29,11 @@ function Home() {
 	const [showAlbum, setShowAlbum] = useState("");
 	const [albumId, setAlbumId] = useState("");
 	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState("");
+	const [error, setError] = useState(false);
 
 	const time = localStorage.getItem("time");
 
-	const { logout, getAccessToken, refreshToken } = useContext(UserContext);
+	const { getAccessToken } = useContext(UserContext);
 	const { showPlaybar } = useContext(PlaybarContext);
 
 	// Function for showing recently listened to songs
@@ -47,7 +43,7 @@ function Home() {
 
 	const getGreeting = (date) => {
 		const timeHour =
-			Number(date.slice(0, 2)) !== NaN ? date.slice(0, 1) : date.slice(0, 1);
+			date.slice(0, 2) !== NaN ? date.slice(0, 2) : date.slice(0, 1);
 		const amOrpm = date.slice(date.length - 2);
 
 		if (amOrpm.toLowerCase() === "am") {
@@ -62,7 +58,7 @@ function Home() {
 			return "Good evening";
 		}
 
-		console.log("THIS IS THE HOkUR", timeHour);
+		console.log("HOUUURRR", timeHour);
 
 		return "Hello";
 	};
@@ -94,7 +90,8 @@ function Home() {
 			// After everything has been resolved set loading to false
 			setLoading(false);
 		} catch {
-			setError("something went wrong");
+			setLoading(false);
+			setError(true);
 		}
 	};
 
@@ -167,6 +164,7 @@ function Home() {
 					</div>
 				)}
 			</div>
+			{error && <p>Hmmm something went wrong...</p>}
 			<Navbar />
 		</div>
 	);

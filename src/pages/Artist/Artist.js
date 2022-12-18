@@ -12,12 +12,12 @@ require("./Artist.css");
 function Artist() {
 	const [artist, setArtist] = useState(null);
 	const [topItems, setTopItems] = useState(null);
-	const [albums, setAlbums] = useState(null);
 	const [albumsArr, setAlbumsArr] = useState(null);
 	const [singlesArr, setSinglesArr] = useState(null);
 	const [showAlbum, setShowAlbum] = useState("");
 	const [albumId, setAlbumId] = useState("");
 	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(false);
 
 	const { showPlaybar } = useContext(PlaybarContext);
 	const { getAccessToken } = useContext(UserContext);
@@ -34,31 +34,41 @@ function Artist() {
 		setShowAlbum("show");
 	};
 
+	// Function for getting the artists details
 	const getArtistDetails = async () => {
 		try {
+			// Use the name from the url as the argument for the getArtist function
 			const details = await getArtist(param.artist);
 			setArtist(details.data.body.artists.items[0]);
 
+			// Get the id for that artist from the reult of the getArtist function
 			const id = details.data.body.artists.items[0].id;
 
+			// Use the id for the paramater to get the albums from the getArtistAlbums function
 			const albumsResult = await getArtistAlbums(id);
+
+			// Return only the albums that contain a "album" or "single" album_group value
 			const excludeFeatures = albumsResult.data.items.filter((el) => {
 				if (el.album_group === "album" || el.album_group === "single") {
 					return el;
 				}
 			});
+
+			// Filter the albums so there are no duplicates
 			const uniqueArr = [
 				...new Map(
 					excludeFeatures.map((item) => [item["name"], item])
 				).values(),
 			];
 
+			// Make an array of only albums that contain "single" value
 			let filteredSinglesArr = uniqueArr.filter((el) => {
 				if (el.album_group === "single") {
 					return el;
 				}
 			});
 
+			// Make an array of only albums that contain "album" value
 			let filteredAlbumsArr = uniqueArr.filter((el) => {
 				if (el.album_group === "album") {
 					return el;
@@ -68,17 +78,14 @@ function Artist() {
 			setSinglesArr(filteredSinglesArr);
 			setAlbumsArr(filteredAlbumsArr);
 
-			console.log("THESE ARE THE SINGLES", singlesArr);
-			console.log("THESE ARE THE ALBUMS", albumsArr);
-
-			setAlbums(uniqueArr);
-
+			// Get the artists top albums
 			const topItemsResult = await getArtistTracks(id);
 			setTopItems(topItemsResult.data.tracks);
 
 			setLoading(false);
 		} catch (err) {
-			console.log(err);
+			setLoading(false);
+			setError(true);
 		}
 	};
 
@@ -86,15 +93,6 @@ function Artist() {
 		getAccessToken();
 		getArtistDetails();
 	}, []);
-
-	// const l = uniqueArr(excludeFeatures);
-
-	// console.log("THIS IS THE ARTIST", artist);
-	// console.log("THIS IS THE ALBUMS", albums);
-	// console.log("THIS IS THE TOP ITEMS", topItems);
-
-	console.log("THESE ARE THE SINGLES", singlesArr);
-	console.log("THESE ARE THE ALBUMS", albumsArr);
 
 	return (
 		<div className={"artist-page " + showPlaybar}>
@@ -221,6 +219,7 @@ function Artist() {
 					</div>
 				</div>
 			)}
+			{error && <p>Hmmm somthing went wrong...</p>}
 			<Navbar />
 		</div>
 	);

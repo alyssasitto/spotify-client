@@ -7,10 +7,7 @@ function Player() {
 	const { currentSong, playState, currentAlbum, pause, resume } =
 		useContext(PlaybarContext);
 
-	useEffect(() => {
-		console.log("TRACKKK", currentSong);
-		console.log("ALBUMM", currentAlbum);
-	}, [currentSong]);
+	useEffect(() => {}, [currentSong]);
 
 	return (
 		<div className="player-container">

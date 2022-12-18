@@ -11,7 +11,7 @@ function SearchResults(props) {
 	const [loading, setLoading] = useState(true);
 	const [artist, setArtist] = useState([]);
 	const [searchResults, setSearchResults] = useState([]);
-	const [error, setError] = useState("");
+	const [error, setError] = useState(false);
 
 	const { clickSong, showPlaybar } = useContext(PlaybarContext);
 
@@ -48,7 +48,7 @@ function SearchResults(props) {
 			setLoading(false);
 		} catch {
 			setLoading(false);
-			setError("hmmm something went wrong");
+			setError(true);
 		}
 	};
 
@@ -140,7 +140,7 @@ function SearchResults(props) {
 					})}
 				</div>
 			)}
-			{error && <p>{error}</p>}
+			{error && <p>Hmmm something went wrong...</p>}
 		</div>
 	);
 }
