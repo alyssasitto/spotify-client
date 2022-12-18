@@ -118,7 +118,6 @@ function Home() {
 							src="images/spotify-loading-gif.gif"
 							className="loading-icon"
 						></img>
-						<button onClick={logout}>logout</button>
 					</div>
 				)}
 				{!loading && (
