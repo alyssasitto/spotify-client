@@ -35,5 +35,9 @@ window.onSpotifyWebPlaybackSDKReady = () => {
 
 	player.activateElement();
 
+	player.setVolume(0.5).then(() => {
+		console.log("Volume updated!");
+	});
+
 	player.connect();
 };
