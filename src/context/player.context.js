@@ -15,6 +15,7 @@ function PlaybarProviderWrapper(props) {
 
 	const playSong = async (context_uri, track_number) => {
 		const device_id = localStorage.getItem("device_id");
+		player.activateElement();
 
 		try {
 			const track = track_number - 1;
@@ -62,8 +63,6 @@ function PlaybarProviderWrapper(props) {
 				setCurrentTrack(state.track_window.current_track);
 				setCurrentState(state);
 			});
-
-			player.activateElement();
 
 			player.connect();
 		};
