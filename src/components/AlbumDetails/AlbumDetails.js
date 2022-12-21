@@ -114,7 +114,7 @@ function AlbumDetails(props) {
 						{album.tracks.items &&
 							album.tracks.items.map((el, index) => {
 								return (
-									<a
+									<button
 										onClick={async () =>
 											await playSong(album.uri, el.track_number)
 										}
@@ -139,7 +139,7 @@ function AlbumDetails(props) {
 											</p>
 										</div>
 										<img src="images/ellipsis.svg" className="ellipsis"></img>
-									</a>
+									</button>
 								);
 							})}
 					</div>
