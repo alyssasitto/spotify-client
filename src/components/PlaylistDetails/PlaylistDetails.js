@@ -94,7 +94,7 @@ function PlaylistDetails(props) {
 									<img src="images/replay.png"></img>
 								</button>
 								<div className="play-btn">
-									<button>
+									<button onClick={async () => await playSong(playlist.uri, 1)}>
 										<img src="images/right-arrow.png"></img>
 									</button>
 								</div>
@@ -105,7 +105,7 @@ function PlaylistDetails(props) {
 					<div className="tracks">
 						{playlist.tracks.items.map((el, index) => {
 							return (
-								<div
+								<button
 									key={index}
 									onClick={async () =>
 										await playSong(el.track.album.uri, el.track.track_number)
@@ -130,7 +130,7 @@ function PlaylistDetails(props) {
 										</p>
 									</div>
 									<img src="images/ellipsis.svg" className="ellipsis"></img>
-								</div>
+								</button>
 							);
 						})}
 					</div>

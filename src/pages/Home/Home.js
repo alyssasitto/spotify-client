@@ -103,6 +103,7 @@ function Home() {
 	};
 
 	useEffect(() => {
+		setShowAlbum("");
 		getAccessToken();
 		getItems();
 	}, [topItems, newReleases]);

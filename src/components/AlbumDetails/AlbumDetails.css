@@ -98,10 +98,13 @@
 .track {
 	display: flex;
 	justify-content: space-between;
+	background-color: transparent;
+	border: none;
+	color: #fff;
+	text-align: left;
 }
 
 .track .name {
-	color: #a5a4a4;
 	margin-top: 0.4rem;
 	display: flex;
 	align-items: center;
@@ -110,12 +113,12 @@
 }
 
 .artist-link {
-	border-bottom: 2px solid transparent;
 	transition: all 0.2s;
+	border-bottom: 1px solid transparent;
 }
 
 .artist-link:hover {
-	border-bottom: 2px solid #fff;
+	border-bottom: 1px solid #fff;
 }
 
 @media screen and (min-width: 1000px) {

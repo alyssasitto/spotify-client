@@ -28,7 +28,7 @@ function RecentSongs(props) {
 			<div className="songs">
 				{props.recentSongs.data.items.map((el) => {
 					return (
-						<div
+						<button
 							onClick={async () =>
 								await playSong(el.track.album.uri, el.track.track_number)
 							}
@@ -49,7 +49,7 @@ function RecentSongs(props) {
 								</div>
 							</div>
 							<img src="images/ellipsis.svg" className="ellipsis"></img>
-						</div>
+						</button>
 					);
 				})}
 			</div>

@@ -97,7 +97,7 @@ function SearchResults(props) {
 
 					{searchResults.map((el) => {
 						return (
-							<div
+							<button
 								onClick={async () =>
 									await playSong(el.album.uri, el.track_number)
 								}
@@ -125,7 +125,7 @@ function SearchResults(props) {
 									</div>
 								</div>
 								<img src="images/ellipsis.svg" className="ellipsis"></img>
-							</div>
+							</button>
 						);
 					})}
 				</div>

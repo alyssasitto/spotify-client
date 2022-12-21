@@ -133,7 +133,7 @@ function Artist() {
 							{topItems.slice(0, 5).map((el, index) => {
 								console.log(el);
 								return (
-									<div
+									<button
 										onClick={async () =>
 											await playSong(el.album.uri, el.track_number)
 										}
@@ -158,7 +158,7 @@ function Artist() {
 											</div>
 										</div>
 										<img src="images/ellipsis.svg" className="ellipsis"></img>
-									</div>
+									</button>
 								);
 							})}
 						</div>

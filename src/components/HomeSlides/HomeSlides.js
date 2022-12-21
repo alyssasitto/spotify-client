@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import AlbumDetails from "../AlbumDetails/AlbumDetails";
-import { getAlbumDetails } from "../../utils";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -14,7 +13,7 @@ import "swiper/css/pagination";
 // Import required modules
 import { FreeMode, Pagination } from "swiper";
 
-require("../Slides/Slides.css");
+require("../Slides.css");
 
 function HomeSlides() {
 	const [showAlbum, setShowAlbum] = useState("");

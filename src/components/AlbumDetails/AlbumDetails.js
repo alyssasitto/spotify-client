@@ -102,7 +102,7 @@ function AlbumDetails(props) {
 									<img src="images/replay.png"></img>
 								</button>
 								<div className="play-btn">
-									<button>
+									<button onClick={async () => await playSong(album.uri, 1)}>
 										<img src="images/right-arrow.png"></img>
 									</button>
 								</div>
