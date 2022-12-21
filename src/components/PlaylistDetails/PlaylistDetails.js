@@ -112,8 +112,6 @@ function PlaylistDetails(props) {
 
 					<div className="tracks">
 						{playlist.tracks.items.map((el, index) => {
-							console.log("the playlist", playlist);
-							console.log("the song", el);
 							return (
 								<div
 									key={index}

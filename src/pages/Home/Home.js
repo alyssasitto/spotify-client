@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/user.context";
+import { useQuery } from "react-query";
 import Navbar from "../../components/Navbar/Navbar";
 import RecentSongs from "../../components/RecentSongs/RecentSongs";
 import AlbumDetails from "../../components/AlbumDetails/AlbumDetails";

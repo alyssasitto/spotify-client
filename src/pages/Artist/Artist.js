@@ -1,6 +1,11 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { getArtist, getArtistAlbums, getArtistTracks } from "../../utils";
+import {
+	getArtist,
+	getArtistAlbums,
+	getArtistTracks,
+	playSong,
+} from "../../utils";
 import { PlaybarContext } from "../../context/player.context";
 import Navbar from "../../components/Navbar/Navbar";
 import AlbumDetails from "../../components/AlbumDetails/AlbumDetails";
@@ -132,9 +137,12 @@ function Artist() {
 						<h2>Popular</h2>
 						<div className="artist-songs flex-container">
 							{topItems.slice(0, 5).map((el, index) => {
+								console.log(el);
 								return (
 									<div
-										onClick={() => viewAlbum(el.album.id)}
+										onClick={async () =>
+											await playSong(el.album.uri, el.track_number)
+										}
 										className="song-container"
 									>
 										<div className="song-details">

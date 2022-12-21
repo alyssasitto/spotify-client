@@ -6,10 +6,11 @@ import Player from "../Player/Player";
 require("./Navbar.css");
 
 function Navbar() {
-	const { showPlaybar } = useContext(PlaybarContext);
+	const { showPlaybar, currentTrack } = useContext(PlaybarContext);
+
 	return (
 		<div className={"navbar " + showPlaybar}>
-			{showPlaybar.length > 0 && <Player />}
+			{currentTrack && <Player />}
 
 			<div>
 				<ul>

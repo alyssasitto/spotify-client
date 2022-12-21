@@ -1,6 +1,6 @@
 .player-container {
-	height: 5.5rem;
-	width: 90%;
+	height: fit-content;
+	width: 95%;
 	margin: auto;
 	border-radius: 4px;
 	background-color: #1c1c1d;
@@ -46,6 +46,20 @@
 	position: absolute;
 }
 
+.seek-btn {
+	width: 3.5rem;
+}
+
+.btns-container {
+	display: flex;
+	align-items: center;
+}
+
+.btns-container button {
+	background-color: transparent;
+	border: none;
+}
+
 @media screen and (min-width: 1000px) {
 	.player-container {
 		position: absolute;
@@ -71,7 +85,22 @@
 		margin-bottom: 1rem;
 	}
 
-	.buttons {
+	.btns-container {
 		margin-right: 5rem;
+	}
+
+	.play-state {
+		width: 3.5rem;
+		height: 3.5rem;
+	}
+
+	.btns-container {
+		gap: 3rem;
+		align-items: flex-start;
+	}
+
+	.seek-btn {
+		width: 3.5rem;
+		height: 3.5rem;
 	}
 }
