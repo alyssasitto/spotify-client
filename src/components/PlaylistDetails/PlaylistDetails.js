@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState, useContext } from "react";
-import { getPlaylist, playSong } from "../../utils";
+import { getPlaylist } from "../../utils";
 import { PlaybarContext } from "../../context/player.context";
 import { Link } from "react-router-dom";
 
@@ -11,18 +11,10 @@ function PlaylistDetails(props) {
 	const [playlist, setPlaylist] = useState([]);
 	const [error, setError] = useState(false);
 
-	const { clickSong, showPlaybar } = useContext(PlaybarContext);
+	const { showPlaybar, playSong } = useContext(PlaybarContext);
 
 	const back = () => {
 		props.setShowPlaylist("");
-	};
-
-	const play = async (uri, track, song) => {
-		const playResult = await playSong(uri, track);
-
-		clickSong(song);
-
-		return playResult;
 	};
 
 	const getPlaylistDetails = async () => {
@@ -115,8 +107,8 @@ function PlaylistDetails(props) {
 							return (
 								<div
 									key={index}
-									onClick={() =>
-										play(el.track.album.uri, el.track.track_number, el.track)
+									onClick={async () =>
+										await playSong(el.track.album.uri, el.track.track_number)
 									}
 									className="track"
 								>

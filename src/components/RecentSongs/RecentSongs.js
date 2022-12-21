@@ -1,22 +1,13 @@
 import { useContext } from "react";
-import { playSong } from "../../utils";
 import { PlaybarContext } from "../../context/player.context";
 
 require("./RecentSongs.css");
 
 function RecentSongs(props) {
-	const { clickSong, showPlaybar } = useContext(PlaybarContext);
+	const { showPlaybar, playSong } = useContext(PlaybarContext);
 
 	const back = () => {
 		props.setShowRecents("");
-	};
-
-	const play = async (uri, track, song) => {
-		const playResult = await playSong(uri, track);
-
-		clickSong(song);
-
-		return playResult;
 	};
 
 	return (
@@ -38,8 +29,8 @@ function RecentSongs(props) {
 				{props.recentSongs.data.items.map((el) => {
 					return (
 						<div
-							onClick={() =>
-								play(el.track.album.uri, el.track.track_number, el.track)
+							onClick={async () =>
+								await playSong(el.track.album.uri, el.track.track_number)
 							}
 							className="song-container"
 						>

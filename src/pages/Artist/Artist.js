@@ -1,11 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import {
-	getArtist,
-	getArtistAlbums,
-	getArtistTracks,
-	playSong,
-} from "../../utils";
+import { getArtist, getArtistAlbums, getArtistTracks } from "../../utils";
 import { PlaybarContext } from "../../context/player.context";
 import Navbar from "../../components/Navbar/Navbar";
 import AlbumDetails from "../../components/AlbumDetails/AlbumDetails";
@@ -24,7 +19,7 @@ function Artist() {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(false);
 
-	const { showPlaybar } = useContext(PlaybarContext);
+	const { showPlaybar, playSong } = useContext(PlaybarContext);
 	const { getAccessToken } = useContext(UserContext);
 
 	const param = useParams();
@@ -129,7 +124,6 @@ function Artist() {
 						className="image-heading"
 						style={{ backgroundImage: "url(" + artist.images[0].url + ")" }}
 					>
-						{/* <img src={artist.images[0].url}></img> */}
 						<h1 className="artist-heading">{artist.name}</h1>
 					</div>
 

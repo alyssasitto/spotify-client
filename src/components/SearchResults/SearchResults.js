@@ -1,6 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { useSearchParams } from "react-router-dom";
-import { getArtist, getSearchResults, playSong } from "../../utils";
+import { getArtist, getSearchResults } from "../../utils";
 import { Link } from "react-router-dom";
 import { PlaybarContext } from "../../context/player.context";
 import { useNavigate } from "react-router-dom";
@@ -13,18 +12,10 @@ function SearchResults(props) {
 	const [searchResults, setSearchResults] = useState([]);
 	const [error, setError] = useState(false);
 
-	const { clickSong, showPlaybar } = useContext(PlaybarContext);
+	const { showPlaybar, playSong } = useContext(PlaybarContext);
 
 	const back = () => {
 		props.setShowSearchResults("");
-	};
-
-	const play = async (uri, track, song) => {
-		const playResult = await playSong(uri, track);
-
-		clickSong(song);
-
-		return playResult;
 	};
 
 	const navigate = useNavigate();
@@ -57,9 +48,6 @@ function SearchResults(props) {
 			getResults();
 		}
 	}, [props.showSearchResults]);
-
-	console.log("THESE ARE THE SEARCH RESULTS", searchResults);
-	console.log("THESE ARE THE ARTIST RESULTS ===>", artist);
 
 	return (
 		<div
@@ -110,7 +98,9 @@ function SearchResults(props) {
 					{searchResults.map((el) => {
 						return (
 							<div
-								onClick={() => play(el.album.uri, el.track_number, el)}
+								onClick={async () =>
+									await playSong(el.album.uri, el.track_number)
+								}
 								className="song-container"
 							>
 								<div className="song-details">

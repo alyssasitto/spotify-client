@@ -1,44 +1,34 @@
 import { createContext, useState, useEffect } from "react";
-import { pauseSong, playSong } from "../utils";
+import axios from "axios";
 
 const PlaybarContext = createContext();
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function PlaybarProviderWrapper(props) {
-	const [currentSong, setCurrentSong] = useState(null);
-	const [currentAlbum, setCurrentAlbum] = useState(null);
 	const [showPlaybar, setShowPlaybar] = useState("");
-	const [playState, setPlayState] = useState(false);
 	const [player, setPlayer] = useState(undefined);
 	const [currentTrack, setCurrentTrack] = useState(null);
 	const [currentState, setCurrentState] = useState(null);
 
-	const clickSong = (song, album) => {
-		setCurrentSong(song);
-		setCurrentAlbum(album);
-		localStorage.setItem("current_song", JSON.stringify(song));
-		localStorage.setItem("current_album", JSON.stringify(album));
+	const token = localStorage.getItem("spotify_access_token");
 
-		setPlayState(true);
+	const playSong = async (context_uri, track_number) => {
+		const device_id = localStorage.getItem("device_id");
 
-		setShowPlaybar("show-playbar");
-	};
+		try {
+			const track = track_number - 1;
 
-	const pause = async () => {
-		const result = await pauseSong();
-		setPlayState(false);
+			const play = await axios.get(`${API_URL}/play_song`, {
+				headers: { token, context_uri, track, device_id },
+			});
 
-		return result;
-	};
+			setShowPlaybar("show-playbar");
 
-	const resume = async (uri, track) => {
-		const timestamp = JSON.parse(localStorage.getItem("currently_playing")).body
-			.progress_ms;
-
-		const result = await playSong(uri, track, timestamp);
-
-		setPlayState(true);
-
-		return result;
+			return play;
+		} catch (err) {
+			return err;
+		}
 	};
 
 	useEffect(() => {
@@ -54,6 +44,7 @@ function PlaybarProviderWrapper(props) {
 			setPlayer(player);
 
 			player.addListener("ready", ({ device_id }) => {
+				// Save id to local storage in order to play songs later on
 				localStorage.setItem("device_id", device_id);
 				console.log("Ready with Device ID", device_id);
 			});
@@ -76,23 +67,16 @@ function PlaybarProviderWrapper(props) {
 
 			player.connect();
 		};
-	});
+	}, []);
 
 	return (
 		<PlaybarContext.Provider
 			value={{
 				showPlaybar,
-				clickSong,
-				currentSong,
-				playState,
-				currentAlbum,
-				currentSong,
 				currentTrack,
 				currentState,
 				player,
-
-				pause,
-				resume,
+				playSong,
 			}}
 		>
 			{props.children}

@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { getAlbumDetails, playSong } from "../../utils";
+import { getAlbumDetails } from "../../utils";
 import { PlaybarContext } from "../../context/player.context";
 import { Link } from "react-router-dom";
 
@@ -10,7 +10,8 @@ function AlbumDetails(props) {
 	const [album, setAlbum] = useState([]);
 	const [error, setError] = useState("");
 
-	const { clickSong, showPlaybar, player } = useContext(PlaybarContext);
+	const { showPlaybar, playSong, player, setTrack } =
+		useContext(PlaybarContext);
 
 	const getAlbum = async () => {
 		try {
@@ -25,14 +26,6 @@ function AlbumDetails(props) {
 			setError(true);
 			setLoading(false);
 		}
-	};
-
-	const play = async (uri, track, song, album) => {
-		const playResult = await playSong(uri, track);
-
-		clickSong(song, album);
-
-		return playResult;
 	};
 
 	const back = () => {
@@ -122,9 +115,9 @@ function AlbumDetails(props) {
 							album.tracks.items.map((el, index) => {
 								return (
 									<div
-										onClick={() => {
-											player.togglePlay();
-										}}
+										onClick={async () =>
+											await playSong(album.uri, el.track_number)
+										}
 										key={el.index}
 										className="track"
 									>
