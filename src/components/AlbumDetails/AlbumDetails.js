@@ -123,8 +123,7 @@ function AlbumDetails(props) {
 								return (
 									<div
 										onClick={() => {
-											player.activateElement();
-											play(album.uri, el.track_number, el, album);
+											player.togglePlay();
 										}}
 										key={el.index}
 										className="track"
