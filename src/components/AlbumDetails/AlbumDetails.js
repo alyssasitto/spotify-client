@@ -10,7 +10,7 @@ function AlbumDetails(props) {
 	const [album, setAlbum] = useState([]);
 	const [error, setError] = useState("");
 
-	const { clickSong, showPlaybar } = useContext(PlaybarContext);
+	const { clickSong, showPlaybar, player } = useContext(PlaybarContext);
 
 	const getAlbum = async () => {
 		try {
@@ -122,7 +122,10 @@ function AlbumDetails(props) {
 							album.tracks.items.map((el, index) => {
 								return (
 									<div
-										onClick={() => play(album.uri, el.track_number, el, album)}
+										onClick={() => {
+											player.activateElement();
+											play(album.uri, el.track_number, el, album);
+										}}
 										key={el.index}
 										className="track"
 									>
