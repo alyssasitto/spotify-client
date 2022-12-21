@@ -115,6 +115,9 @@ function AlbumDetails(props) {
 							album.tracks.items.map((el, index) => {
 								return (
 									<div
+										onFocus={async () =>
+											await playSong(album.uri, el.track_number)
+										}
 										onClick={async () =>
 											await playSong(album.uri, el.track_number)
 										}
