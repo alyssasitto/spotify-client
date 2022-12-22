@@ -64,6 +64,7 @@ function PlaybarProviderWrapper(props) {
 				setCurrentState(state);
 			});
 
+			player.activateElement();
 			player.connect();
 		};
 	}, []);

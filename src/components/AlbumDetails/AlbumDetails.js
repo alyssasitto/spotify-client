@@ -36,11 +36,6 @@ function AlbumDetails(props) {
 		}
 	};
 
-	async function play(uri, track) {
-		const result = await playSong(uri, track);
-		return result;
-	}
-
 	useEffect(() => {
 		if (props.showAlbum === "show") {
 			getAlbum();
