@@ -101,9 +101,7 @@ function AlbumDetails(props) {
 							</button>
 							<div className="btn-helper">
 								<div className="play-btn">
-									<button
-										onTouchStart={async () => await playSong(album.uri, 1)}
-									>
+									<button onClick={async () => await playSong(album.uri, 1)}>
 										<img src="images/right-arrow.png"></img>
 									</button>
 								</div>
@@ -113,15 +111,12 @@ function AlbumDetails(props) {
 
 					<div className="tracks">
 						{album.tracks.items &&
-							album.tracks.items.map((el, index) => {
+							album.tracks.items.map((el) => {
 								return (
 									<button
-										onTouchStart={async () =>
+										onClick={async () =>
 											await playSong(album.uri, el.track_number)
 										}
-										// onClick={async () =>
-										// 	await playSong(album.uri, el.track_number)
-										// }
 										key={el.index}
 										className="track"
 									>
