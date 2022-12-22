@@ -104,6 +104,7 @@ function AlbumDetails(props) {
 								<div className="play-btn">
 									<button
 										onClick={async function play() {
+											player.activateElement();
 											return await playSong(album.uri, 1);
 										}}
 									>
