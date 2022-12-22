@@ -7,6 +7,7 @@ import Search from "./pages/Search/Search";
 import Library from "./pages/Library/Library";
 import Artist from "./pages/Artist/Artist";
 import Error from "./pages/Error/Error";
+import Navbar from "./components/Navbar/Navbar";
 
 import IsLoggedIn from "./components/IsLoggedIn/IsLoggedIn";
 import IsLoggedOut from "./components/IsLoggedOut/IsLoggedOut";

@@ -2,6 +2,7 @@ import { useEffect, useState, useContext, useRef } from "react";
 import { getAlbumDetails } from "../../utils";
 import { PlaybarContext } from "../../context/player.context";
 import { Link } from "react-router-dom";
+import Navbar from "../../components/Navbar/Navbar";
 
 require("./AlbumDetails.css");
 
@@ -148,6 +149,7 @@ function AlbumDetails(props) {
 					</footer>
 				</div>
 			)}
+
 			{error && <p>Hmmm something went wrong...</p>}
 		</div>
 	);
