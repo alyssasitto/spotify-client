@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
 import { getAlbumDetails } from "../../utils";
 import { PlaybarContext } from "../../context/player.context";
 import { Link } from "react-router-dom";
