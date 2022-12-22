@@ -46,6 +46,8 @@ function AlbumDetails(props) {
 		}
 	}, [props.albumId]);
 
+	console.log("THIS IS THE PLAYER", player);
+
 	return (
 		<div
 			className={
@@ -98,11 +100,10 @@ function AlbumDetails(props) {
 								<img src="images/heart.png"></img>
 							</button>
 							<div className="btn-helper">
-								<button className="btn">
-									<img src="images/replay.png"></img>
-								</button>
 								<div className="play-btn">
-									<button onClick={async () => await playSong(album.uri, 1)}>
+									<button
+										onTouchStart={async () => await playSong(album.uri, 1)}
+									>
 										<img src="images/right-arrow.png"></img>
 									</button>
 								</div>
@@ -115,9 +116,12 @@ function AlbumDetails(props) {
 							album.tracks.items.map((el, index) => {
 								return (
 									<button
-										onClick={async () =>
+										onTouchStart={async () =>
 											await playSong(album.uri, el.track_number)
 										}
+										// onClick={async () =>
+										// 	await playSong(album.uri, el.track_number)
+										// }
 										key={el.index}
 										className="track"
 									>
