@@ -67,6 +67,7 @@
 	}
 
 	.recents-arrow {
-		left: 0;
+		left: 10rem;
+		text-align: left;
 	}
 }
