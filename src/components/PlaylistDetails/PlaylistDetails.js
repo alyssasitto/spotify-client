@@ -90,9 +90,6 @@ function PlaylistDetails(props) {
 								<img src="images/heart.png"></img>
 							</button>
 							<div className="btn-helper">
-								<button className="btn">
-									<img src="images/replay.png"></img>
-								</button>
 								<div className="play-btn">
 									<button onClick={async () => await playSong(playlist.uri, 1)}>
 										<img src="images/right-arrow.png"></img>
