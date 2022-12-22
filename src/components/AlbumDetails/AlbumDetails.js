@@ -36,6 +36,11 @@ function AlbumDetails(props) {
 		}
 	};
 
+	async function play(uri, track) {
+		player.activateElement();
+		return await playSong(album.uri, 1);
+	}
+
 	useEffect(() => {
 		if (props.showAlbum === "show") {
 			getAlbum();
@@ -102,12 +107,7 @@ function AlbumDetails(props) {
 									<img src="images/replay.png"></img>
 								</button>
 								<div className="play-btn">
-									<button
-										onClick={async function play() {
-											player.activateElement();
-											return await playSong(album.uri, 1);
-										}}
-									>
+									<button onClick={play(album.uri, 1)}>
 										<img src="images/right-arrow.png"></img>
 									</button>
 								</div>
@@ -120,9 +120,7 @@ function AlbumDetails(props) {
 							album.tracks.items.map((el, index) => {
 								return (
 									<button
-										onClick={async () =>
-											await playSong(album.uri, el.track_number)
-										}
+										onClick={play(album.uri, el.track_number)}
 										key={el.index}
 										className="track"
 									>
